@@ -3,18 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <title>Shanabot Market</title>
-    <script src="market_data.js"></script>
     <style>
         @font-face { font-family: 'Hemi Head'; src: url('hemi head bd it.ttf'); }
-        :root { --ana: #00f2ff; --altin: #ffd700; --bg: #06090f; --font: 'Hemi Head', sans-serif; }
+        :root { 
+            --ana: #00f2ff; 
+            --altin: #ffd700; 
+            --bg: #06090f; 
+            --font: 'Hemi Head', sans-serif; 
+        }
         * { font-family: var(--font) !important; box-sizing: border-box; }
-        body { background: var(--bg); color: #fff; padding: 50px 20px; display: flex; flex-direction: column; align-items: center; }
-        .market-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; width: 100%; max-width: 1200px; }
-        .item-card { background: #11151c; border: 2px solid #2a3241; border-radius: 25px; padding: 35px; text-align: center; transition: 0.4s; }
-        .item-card:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(0, 242, 255, 0.1); }
-        .item-card img { width: 180px; height: 180px; object-fit: contain; margin-bottom: 20px; }
-        .item-price { background: var(--altin); color: #000; padding: 10px 30px; border-radius: 50px; font-weight: bold; font-size: 22px; }
-        .cmd-box { margin-top: 30px; background: rgba(0, 255, 136, 0.05); padding: 12px; border-radius: 10px; color: #00ff88; border: 1px solid rgba(0, 255, 136, 0.2); }
+        body { 
+            background: var(--bg); 
+            color: #fff; 
+            padding: 50px 20px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+        }
+        .market-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 30px; 
+            width: 100%; 
+            max-width: 1200px; 
+        }
+        .item-card { 
+            background: #11151c; 
+            border: 2px solid #2a3241; 
+            border-radius: 25px; 
+            padding: 35px; 
+            text-align: center; 
+            transition: 0.4s; 
+        }
+        .item-card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 15px 35px rgba(0, 242, 255, 0.1); 
+        }
+        .item-card img { 
+            width: 180px; 
+            height: 180px; 
+            object-fit: contain; 
+            margin-bottom: 20px; 
+        }
+        .item-price { 
+            background: var(--altin); 
+            color: #000; 
+            padding: 10px 30px; 
+            border-radius: 50px; 
+            font-weight: bold; 
+            font-size: 22px; 
+            display: inline-block;
+        }
+        .cmd-box { 
+            margin-top: 30px; 
+            background: rgba(0, 255, 136, 0.05); 
+            padding: 12px; 
+            border-radius: 10px; 
+            color: #00ff88; 
+            border: 1px solid rgba(0, 255, 136, 0.2); 
+        }
     </style>
 </head>
 <body>
@@ -25,19 +72,44 @@
     <div id="reyon" class="market-grid"></div>
 
     <script>
-        const reyon = document.getElementById('reyon');
-        marketUrunleri.forEach(u => {
-            reyon.innerHTML += `
-                <div class="item-card" style="border-color: ${u.renk}">
-                    <img src="${u.gif}">
-                    <span style="display:block; font-size:28px; color:${u.renk}; margin-bottom:15px;">${u.ad}</span>
-                    <p style="color:rgba(255,255,255,0.5); margin-bottom:25px; height:45px;">${u.desc}</p>
-                    <span class="item-price">${u.fiyat} 💰</span>
-                    <div class="cmd-box" style="color:${u.renk}; border-color:${u.renk}66">
-                        <small style="display:block; opacity:0.3; font-size:10px;">KOMUT:</small>${u.cmd}
-                    </div>
-                </div>`;
-        });
+        const orijinalUrunler = [
+            { id: 1, ad: "Pokemon Kutusu", fiyat: "250.000", gif: "market/kutu.gif", desc: "Rastgele bir pokemon yakala.", cmd: "!pokemonkutusu" },
+            { id: 2, ad: "Youtube Shorts", fiyat: "25.000", gif: "market/shorts.gif", desc: "Maksimum 60 saniyelik Shorts.", cmd: "!shorts" },
+            { id: 3, ad: "Youtube Video", fiyat: "75.000", gif: "market/video.gif", desc: "Atmak istediğiniz videoyu komuttan sonra yazın. (Maksimum Süre 3 dakika 30 saniye)", cmd: "!video" },
+            { id: 4, ad: "Asma", fiyat: "150.000", gif: "market/asma.gif", desc: "Chattten birini 5dk boyunca timeoutlar. Şeyh Sait gibi ekranda asılır.", cmd: "!asma" },
+            { id: 5, ad: "Sula", fiyat: "7.500", gif: "market/sula.gif", desc: "Yayıncıya Su içir.", cmd: "!sula" },
+            { id: 6, ad: "Gif", fiyat: "2000", gif: "market/tenor.gif", desc: "attığınız tenor gifleri veya yazdığınız şey ekranda oynar. 30 Haziranda kapanacak", cmd: "!gif" },
+            { id: 7, ad: "Tiktok", fiyat: "35000", gif: "market/tiktok.gif", desc: "Tiktok videosu ekranda oynar.", cmd: "!tiktok" },  
+            { id: 8, ad: "Fal", fiyat: "500", gif: "market/fal.gif", desc: "Günlük falına baktır.", cmd: "!fal" }
+        ];
+
+        function renderMarket() {
+            const reyon = document.getElementById('reyon');
+            reyon.innerHTML = '';
+            
+            if (localStorage.getItem('shana_market_data') === null) {
+                localStorage.setItem('shana_market_data', JSON.stringify(orijinalUrunler));
+            }
+            
+            let aktifUrunler = JSON.parse(localStorage.getItem('shana_market_data'));
+            
+            aktifUrunler.forEach((u, index) => {
+                let dinamikRenk = (index % 2 === 0) ? "#00f2ff" : "#ff4d4d";
+
+                reyon.innerHTML += `
+                    <div class="item-card" style="border-color: ${dinamikRenk}">
+                        <img src="${u.gif}" onerror="this.src='https://via.placeholder.com/180/11151c/00f2ff?text=RESIM+YOK'">
+                        <span style="display:block; font-size:28px; color:${dinamikRenk}; margin-bottom:15px;">${u.ad}</span>
+                        <p style="color:rgba(255,255,255,0.5); margin-bottom:25px; height:45px; overflow:hidden;">${u.desc}</p>
+                        <span class="item-price">${u.fiyat} 💰</span>
+                        <div class="cmd-box" style="color:${dinamikRenk}; border-color:${dinamikRenk}66">
+                            <small style="display:block; opacity:0.3; font-size:10px;">KOMUT:</small>${u.cmd}
+                        </div>
+                    </div>`;
+            });
+        }
+        
+        renderMarket();
     </script>
 </body>
 </html>

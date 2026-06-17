@@ -5,193 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shanabot | Anasayfa</title>
     <style>
-        @font-face {
-            font-family: 'Hemi Head';
-            src: url('hemi head bd it.ttf') format('truetype');
-            font-weight: bold;
-            font-style: italic;
-        }
-
-        :root { 
-            --neon-cyan: #00f2ff; 
-            --neon-pink: #e91e63; 
-            --neon-gold: #ffd700; 
-            --neon-purple: #bc13fe;
-            --neon-green: #00ff88;
-            --neon-white: #ffffff; /* Liderlik için yeni renk */
-            --bg-dark: #05070a;
-            --main-font: 'Hemi Head', sans-serif; 
-        }
-
-        body { 
-            background-color: var(--bg-dark); 
-            background-image: radial-gradient(circle at center, #0d121d 0%, #05070a 100%);
-            color: #fff; 
-            font-family: var(--main-font); 
-            margin: 0; 
-            display: flex; 
-            flex-direction: column;
-            align-items: center; 
-            justify-content: center;
-            min-height: 100vh; 
-            overflow-x: hidden;
-        }
-
-        .hub-container {
-            text-align: center;
-            z-index: 2;
-            padding: 40px 0;
-        }
-
-        h1 {
-            font-size: 70px;
-            text-shadow: 0 0 20px var(--neon-cyan);
-            letter-spacing: 4px;
-            margin-bottom: 50px;
-            text-transform: uppercase;
-            font-style: italic;
-        }
-
-        .menu-grid {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            max-width: 1600px; /* 6 Kart için alan genişletildi */
-        }
-
-        .nav-card {
-            width: 230px; /* 6 kart yan yana sığsın diye hafif daraltıldı */
-            height: 350px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 2px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-        }
-
+        @font-face { font-family: 'Hemi Head'; src: url('hemi head bd it.ttf') format('truetype'); font-weight: bold; font-style: italic; }
+        :root { --neon-cyan: #00f2ff; --neon-pink: #e91e63; --neon-gold: #ffd700; --neon-purple: #bc13fe; --neon-green: #00ff88; --neon-white: #ffffff; --bg-dark: #05070a; --main-font: 'Hemi Head', sans-serif; }
+        body { background-color: var(--bg-dark); background-image: radial-gradient(circle at center, #0d121d 0%, #05070a 100%); color: #fff; font-family: var(--main-font); margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; overflow: hidden; }
+        .hub-container { text-align: center; z-index: 2; padding: 20px 0; width: 100%; max-width: 100vw; display: flex; flex-direction: column; align-items: center; }
+        h1 { font-size: 70px; text-shadow: 0 0 20px var(--neon-cyan); letter-spacing: 4px; margin-bottom: 40px; text-transform: uppercase; font-style: italic; }
+        .menu-grid { display: flex; gap: 25px; justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; padding: 20px 60px 30px 60px; width: calc(100% - 40px); max-width: 1850px; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+        .menu-grid::-webkit-scrollbar { height: 6px; }
+        .menu-grid::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.01); }
+        .menu-grid::-webkit-scrollbar-thumb { background: rgba(0, 242, 255, 0.1); border-radius: 10px; }
+        .nav-card { width: 230px; height: 370px; background: rgba(255, 255, 255, 0.02); border: 2px solid rgba(255, 255, 255, 0.05); border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: all 0.4s; position: relative; overflow: hidden; flex-shrink: 0; }
         .nav-card:hover { transform: translateY(-10px); }
+        
+        /* Renk Temaları */
+        .card-games { border-color: rgba(188, 19, 254, 0.15); } .card-games:hover { border-color: var(--neon-purple); box-shadow: 0 0 40px rgba(188, 19, 254, 0.2); } .card-games .title { color: var(--neon-purple); text-shadow: 0 0 10px rgba(188, 19, 254, 0.5); }
+        .card-pokedex { border-color: rgba(0, 242, 255, 0.15); } .card-pokedex:hover { border-color: var(--neon-cyan); box-shadow: 0 0 40px rgba(0, 242, 255, 0.2); } .card-pokedex .title { color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0, 242, 255, 0.5); }
+        .card-market { border-color: rgba(255, 215, 0, 0.15); } .card-market:hover { border-color: var(--neon-gold); box-shadow: 0 0 40px rgba(255, 215, 0, 0.2); } .card-market .title { color: var(--neon-gold); text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+        .card-basarim { border-color: rgba(233, 30, 99, 0.15); } .card-basarim:hover { border-color: var(--neon-pink); box-shadow: 0 0 40px rgba(233, 30, 99, 0.2); } .card-basarim .title { color: var(--neon-pink); text-shadow: 0 0 10px rgba(233, 30, 99, 0.5); }
+        .card-leader { border-color: rgba(255, 255, 255, 0.08); } .card-leader:hover { border-color: var(--neon-white); box-shadow: 0 0 40px rgba(255, 255, 255, 0.2); } .card-leader .title { color: var(--neon-white); text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+        .card-event { border-color: rgba(0, 255, 136, 0.15); } .card-event:hover { border-color: var(--neon-green); box-shadow: 0 0 40px rgba(0, 255, 136, 0.2); } .card-event .title { color: var(--neon-green); text-shadow: 0 0 10px rgba(0, 255, 136, 0.5); }
+        .card-faq { border-color: rgba(188, 19, 254, 0.15); } .card-faq:hover { border-color: var(--neon-purple); box-shadow: 0 0 40px rgba(188, 19, 254, 0.2); } .card-faq .title { color: var(--neon-purple); text-shadow: 0 0 10px rgba(188, 19, 254, 0.5); }
+        .card-watchparty { border-color: rgba(233, 30, 99, 0.2); } .card-watchparty:hover { border-color: var(--neon-pink); box-shadow: 0 0 40px rgba(233, 30, 99, 0.3); } .card-watchparty .title { color: var(--neon-pink); text-shadow: 0 0 10px rgba(233, 30, 99, 0.5); }
 
-        .card-pokedex { border-color: rgba(0, 242, 255, 0.2); }
-        .card-pokedex:hover { border-color: var(--neon-cyan); box-shadow: 0 0 40px rgba(0, 242, 255, 0.2); }
-        .card-pokedex .title { color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0, 242, 255, 0.5); }
-
-        .card-market { border-color: rgba(255, 215, 0, 0.2); }
-        .card-market:hover { border-color: var(--neon-gold); box-shadow: 0 0 40px rgba(255, 215, 0, 0.2); }
-        .card-market .title { color: var(--neon-gold); text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
-
-        .card-basarim { border-color: rgba(233, 30, 99, 0.2); }
-        .card-basarim:hover { border-color: var(--neon-pink); box-shadow: 0 0 40px rgba(233, 30, 99, 0.2); }
-        .card-basarim .title { color: var(--neon-pink); text-shadow: 0 0 10px rgba(233, 30, 99, 0.5); }
-
-        /* Liderlik Kartı Stili */
-        .card-leader { border-color: rgba(255, 255, 255, 0.1); }
-        .card-leader:hover { border-color: var(--neon-white); box-shadow: 0 0 40px rgba(255, 255, 255, 0.2); }
-        .card-leader .title { color: var(--neon-white); text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
-
-        .card-event { border-color: rgba(0, 255, 136, 0.2); }
-        .card-event:hover { border-color: var(--neon-green); box-shadow: 0 0 40px rgba(0, 255, 136, 0.2); }
-        .card-event .title { color: var(--neon-green); text-shadow: 0 0 10px rgba(0, 255, 136, 0.5); }
-
-        .card-faq { border-color: rgba(188, 19, 254, 0.2); }
-        .card-faq:hover { border-color: var(--neon-purple); box-shadow: 0 0 40px rgba(188, 19, 254, 0.2); }
-        .card-faq .title { color: var(--neon-purple); text-shadow: 0 0 10px rgba(188, 19, 254, 0.5); }
-
-        .icon {
-            font-size: 80px;
-            margin-bottom: 25px;
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.1));
-        }
-
-        .title {
-            font-size: 26px;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-            font-style: italic;
-            text-align: center;
-            padding: 0 10px;
-        }
-
-        .desc {
-            font-size: 13px;
-            font-family: 'Segoe UI', sans-serif;
-            font-style: normal;
-            color: #666;
-            padding: 0 25px;
-            line-height: 1.5;
-        }
-
-        .bg-glow {
-            position: absolute;
-            width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            background-size: 100% 2px, 3px 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .footer {
-            position: relative;
-            padding: 30px;
-            font-size: 11px;
-            letter-spacing: 4px;
-            color: #222;
-            text-transform: uppercase;
-            font-style: italic;
-        }
+        .icon { font-size: 80px; margin-bottom: 25px; }
+        .title { font-size: 24px; letter-spacing: 1px; margin-bottom: 15px; font-style: italic; text-align: center; padding: 0 10px; }
+        .desc { font-size: 13px; font-family: 'Segoe UI', sans-serif; color: #666; padding: 0 25px; line-height: 1.5; }
+        .footer { position: fixed; bottom: 15px; font-size: 11px; letter-spacing: 4px; color: #222; text-transform: uppercase; font-style: italic; }
     </style>
 </head>
 <body>
-    <div class="bg-glow"></div>
-
     <div class="hub-container">
         <h1>SHANABOT</h1>
-        
-        <div class="menu-grid">
-            <a href="https://shanapanel.github.io/Shanabot/pokedex.html" target="_blank" class="nav-card card-pokedex">
-                <div class="icon">🔴</div>
-                <div class="title">POKÉDEX</div>
-                <div class="desc">Eğitmenlerin güncel koleksiyon verileri ve aktif savaş takımları.</div>
-            </a>
-
-            <a href="https://shanapanel.github.io/Shanabot/market.html" target="_blank" class="nav-card card-market">
-                <div class="icon">🏦</div>
-                <div class="title">MARKET</div>
-                <div class="desc">Sistem içi varlıklarla ticaret ve özel yetki alım terminali.</div>
-            </a>
-
-            <a href="https://shanapanel.github.io/Shanabot/başarım.html" target="_blank" class="nav-card card-basarim">
-                <div class="icon">🏆</div>
-                <div class="title">BAŞARIMLAR</div>
-                <div class="desc">Kullanıcı rütbeleri, kariyer kayıtları ve kilitli madalyalar.</div>
-            </a>
-
-            <a href="https://shanapanel.github.io/Shanabot/leaderboard.html" target="_blank" class="nav-card card-leader">
-                <div class="icon">👑</div>
-                <div class="title">LİDERLİK</div>
-                <div class="desc">Etkinlik şampiyonları, TOP 25 listesi ve Onur Kürsüsü.</div>
-            </a>
-
-            <a href="https://shanapanel.github.io/Shanabot/eventler.html" target="_blank" class="nav-card card-event">
-                <div class="icon">🎯</div>
-                <div class="title">ETKİNLİKLER</div>
-                <div class="desc">Harf Çorbası ve canlı yayın oyun protokolleri hakkında teknik rehber.</div>
-            </a>
-
-            <a href="https://shanapanel.github.io/Shanabot/faq.html" target="_blank" class="nav-card card-faq">
-                <div class="icon">🏛️</div>
-                <div class="title">ÇOKÇA SORULANLAR</div>
-                <div class="desc">Sistem protokolleri, puan kazanma yöntemleri ve vahşi av kuralları rehberi.</div>
-            </a>
-        </div>
+        <div class="menu-grid" id="hub-grid"></div>
     </div>
-
     <div class="footer">SHANAPANEL DATA CORE // SECURE CONNECTION ESTABLISHED</div>
+
+    <script>
+        const defaultHubCards = [
+            { icon: "🎮", title: "SINGLEPLAYER", color: "games", link: "https://shanapanel.github.io/Shanabot/games.html", desc: "Hikayeli ve açık dünya oyun arşivim." },
+            { icon: "🎬", title: "WATCHPARTY", color: "watchparty", link: "https://shanapanel.github.io/Shanabot/watchparty.html", desc: "Yayında birlikte izlediğimiz anime, dizi ve filmlerin detaylı sezon arşiv rehberi." },
+            { icon: "🔴", title: "POKÉDEX", color: "pokedex", link: "https://shanapanel.github.io/Shanabot/pokedex.html", desc: "Eğitmenlerin güncel koleksiyon verileri ve aktif savaş takımları." },
+            { icon: "🏦", title: "MARKET", color: "market", link: "https://shanapanel.github.io/Shanabot/market.html", desc: "Sistem içi varlıklarla ticaret ve özel yetki alım terminali." },
+            { icon: "🏆", title: "BAŞARIMLAR", color: "basarim", link: "https://shanapanel.github.io/Shanabot/başarım.html", desc: "Kullanıcı rütbeleri, kariyer kayıtları ve kilitli madalyalar." },
+            { icon: "👑", title: "LİDERLİK", color: "leader", link: "https://shanapanel.github.io/Shanabot/leaderboard.html", desc: "Etkinlik şampiyonları, TOP 25 listesi ve Onur Kürsüsü." },
+            { icon: "🎯", title: "ETKİNLİKLER", color: "event", link: "https://shanapanel.github.io/Shanabot/eventler.html", desc: "Harf Çorbası ve canlı yayın oyun protokolleri hakkında teknik rehber." },
+            { icon: "🏛️", title: "ÇOKÇA SORULANLAR", color: "faq", link: "https://shanapanel.github.io/Shanabot/faq.html", desc: "Sistem protokolleri, puan kazanma yöntemleri ve vahşi av kuralları rehberi." }
+        ];
+
+        function renderHub() {
+            const grid = document.getElementById('hub-grid');
+            grid.innerHTML = '';
+            let cards = JSON.parse(localStorage.getItem('shana_hub_cards')) || defaultHubCards;
+            cards.forEach(c => {
+                grid.innerHTML += `<a href="${c.link}" target="_blank" class="nav-card card-${c.color}"><div class="icon">${c.icon}</div><div class="title">${c.title}</div><div class="desc">${c.desc}</div></a>`;
+            });
+        }
+        renderHub();
+    </script>
 </body>
 </html>
