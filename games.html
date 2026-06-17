@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -6,68 +7,33 @@
     <title>Shanabot | Oyun Arşivi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @font-face {
-            font-family: 'Hemi Head';
-            src: url('hemi head bd it.ttf') format('truetype');
-            font-weight: bold;
-            font-style: italic;
-        }
-
-        :root { 
-            --neon-cyan: #00f2ff; 
-            --neon-pink: #e91e63; 
-            --neon-gold: #ffd700; 
-            --neon-purple: #bc13fe;
-            --neon-green: #00ff88;
-            --bg-dark: #05070a;
-            --main-font: 'Hemi Head', sans-serif; 
-        }
-
-        body { 
-            background-color: var(--bg-dark); 
-            background-image: radial-gradient(circle at center, #0d121d 0%, #05070a 100%);
-            color: #fff; 
-            font-family: var(--main-font); 
-            margin: 0; 
-            display: flex; 
-            flex-direction: column;
-            align-items: center; 
-            padding: 40px 20px;
-            box-sizing: border-box;
-            min-height: 100vh;
-        }
-
+        @font-face { font-family: 'Hemi Head'; src: url('hemi head bd it.ttf') format('truetype'); font-weight: bold; font-style: italic; }
+        :root { --neon-cyan: #00f2ff; --neon-pink: #e91e63; --neon-gold: #ffd700; --neon-purple: #bc13fe; --neon-green: #00ff88; --bg-dark: #05070a; --main-font: 'Hemi Head', sans-serif; }
+        body { background-color: var(--bg-dark); background-image: radial-gradient(circle at center, #0d121d 0%, #05070a 100%); color: #fff; font-family: var(--main-font); margin: 0; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; box-sizing: border-box; min-height: 100vh; }
         .hub-container { width: 100%; max-width: 1200px; z-index: 2; display: flex; flex-direction: column; align-items: center; }
         .top-nav { display: flex; justify-content: space-between; align-items: center; width: 100%; border-bottom: 2px solid rgba(0, 242, 255, 0.2); padding-bottom: 20px; margin-bottom: 30px; }
         .top-nav a { color: #666; text-decoration: none; font-size: 20px; letter-spacing: 2px; transition: all 0.3s; }
         .top-nav a:hover { color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0, 242, 255, 0.5); }
         h1 { font-size: 50px; text-shadow: 0 0 20px var(--neon-purple); letter-spacing: 4px; margin: 0 0 30px 0; text-transform: uppercase; font-style: italic; text-align: center; }
-
         .controls-wrapper { display: flex; flex-direction: column; gap: 20px; width: 100%; margin-bottom: 40px; align-items: center; }
         .filter-container { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
         .filter-btn { background: rgba(255, 255, 255, 0.02); border: 2px solid rgba(255, 255, 255, 0.1); color: white; font-family: var(--main-font); font-size: 16px; font-style: italic; padding: 8px 20px; border-radius: 10px; cursor: pointer; transition: all 0.3s; }
         .filter-btn:hover, .filter-btn.active { border-color: var(--neon-purple); box-shadow: 0 0 15px rgba(188, 19, 254, 0.3); color: var(--neon-purple); }
-
         .search-container { position: relative; width: 100%; max-width: 400px; }
         .search-input { width: 100%; padding: 12px 20px 12px 45px; background: rgba(255, 255, 255, 0.02); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; font-family: 'Segoe UI', sans-serif; }
         .search-input:focus { border-color: var(--neon-purple); outline: none; }
         .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: rgba(255, 255, 255, 0.3); }
-
         .menu-grid { display: flex; gap: 25px; justify-content: flex-start; flex-wrap: wrap; width: 100%; }
-        .nav-card { width: 230px; height: 350px; border: 2px solid rgba(188, 19, 254, 0.3); border-radius: 20px; display: flex; align-items: flex-start; justify-content: flex-start; padding: 0; position: relative; overflow: hidden; cursor: pointer; background-size: 230px 350px; background-repeat: no-repeat; background-position: left center; transition: 0.5s; }
+        .nav-card { width: 230px; height: 350px; border: 2px solid rgba(188, 19, 254, 0.3); border-radius: 20px; display: flex; align-items: flex-start; justify-content: flex-start; padding: 0; position: relative; overflow: hidden; cursor: pointer; background-size: cover; background-repeat: no-repeat; background-position: center; transition: 0.5s; flex-shrink: 0; }
         .nav-card:hover { transform: translateY(-5px); border-color: var(--neon-purple); box-shadow: 0 0 25px rgba(188, 19, 254, 0.2); }
         .nav-card.expanded { width: 650px; border-color: var(--neon-pink); }
         .card-main { width: 230px; height: 100%; display: flex; flex-direction: column; position: relative; z-index: 2; flex-shrink: 0; }
-        
         .status-badge { margin: 15px 0 0 15px; align-self: flex-start; font-size: 9px; padding: 3px 8px; border-radius: 8px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); }
-        
-        /* Kartın altındaki yumuşak sis paneli */
         .progress-wrapper { width: calc(100% + 4px); margin-left: -2px; margin-bottom: -2px; margin-top: auto; background: linear-gradient(to top, rgba(5, 7, 10, 1) 0%, rgba(5, 7, 10, 0.95) 60%, rgba(5, 7, 10, 0) 100%); padding: 55px 17px 17px 17px; box-sizing: border-box; border-radius: 0 0 18px 18px; }
         .title { font-size: 22px; margin-bottom: 8px; font-style: italic; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.9); }
         .progress-text { font-size: 14px; font-weight: bold; margin-bottom: 6px; text-align: right; }
         .progress-bar-bg { width: 100%; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; overflow: hidden; }
         .progress-bar-fill { height: 100%; width: 0%; background: var(--neon-cyan); border-radius: 3px; transition: 0.8s; }
-
         .card-details { opacity: 0; visibility: hidden; height: 100%; display: flex; flex-direction: column; width: 420px; background: #0b0f19; padding: 15px; border-left: 1px solid rgba(255, 255, 255, 0.05); }
         .nav-card.expanded .card-details { opacity: 1; visibility: visible; }
         .detail-header { font-family: var(--main-font); color: var(--neon-pink); border-bottom: 2px solid rgba(233, 30, 99, 0.2); padding-bottom: 5px; margin-bottom: 15px; }
@@ -95,13 +61,19 @@
 
     <script>
         const defaultList = [{ image: "https://m.media-amazon.com/images/M/MV/BMTUxMzEwNTIxNV5BMl5BanBnXkFtZTgwNTI0MDM0MjE@._V1_.jpg", title: "GOD OF WAR", status: "devam", current: 15, total: 30, startDate: "01.06.2026", endDate: "-", rating: 5, note: "İskandinav diyarları." }];
-        
+        let currentFilter = 'hepsi';
+        let searchQuery = '';
+
         function renderGrid() {
             const grid = document.getElementById('watch-grid');
             grid.innerHTML = '';
             let list = JSON.parse(localStorage.getItem('shana_games_tracker')) || defaultList;
             
-            list.forEach((item, index) => {
+            list.filter(item => {
+                const matchesFilter = (currentFilter === 'hepsi' || item.status === currentFilter);
+                const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesFilter && matchesSearch;
+            }).forEach((item) => {
                 let perc = Math.round((item.current / item.total) * 100);
                 grid.innerHTML += `
                     <div class="nav-card" style="background-image: url('${item.image}')" onclick="this.classList.toggle('expanded')">
@@ -116,8 +88,8 @@
                         <div class="card-details">
                             <div class="detail-header">OYUN DETAYI</div>
                             <div class="season-row-item">
-                                <div class="season-row-header">
-                                    <span style="color:var(--neon-cyan)">İLERLEME DURUMU</span>
+                                <div class="season-row-header" style="display:flex; justify-content:space-between;">
+                                    <span style="color:var(--neon-cyan)">İLERLEME</span>
                                     <span class="mini-badge">${item.current} / ${item.total} SAAT</span>
                                 </div>
                                 <div style="margin-top:10px; font-size:11px;">Başlangıç: ${item.startDate}</div>
@@ -127,6 +99,19 @@
                     </div>`;
             });
         }
+
+        function filterType(type, btn) {
+            currentFilter = type;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderGrid();
+        }
+
+        function handleSearch() {
+            searchQuery = document.getElementById('search-box').value;
+            renderGrid();
+        }
+
         renderGrid();
     </script>
 </body>

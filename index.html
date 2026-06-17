@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -55,11 +56,21 @@
         function renderHub() {
             const grid = document.getElementById('hub-grid');
             grid.innerHTML = '';
-            let cards = JSON.parse(localStorage.getItem('shana_hub_cards')) || defaultHubCards;
+            
+            // LocalStorage varsa onu kullan, yoksa default listeyi bas
+            let cards = JSON.parse(localStorage.getItem('shana_hub_cards'));
+            if (!cards || cards.length === 0) {
+                cards = defaultHubCards;
+                localStorage.setItem('shana_hub_cards', JSON.stringify(cards));
+            }
+
             cards.forEach(c => {
                 grid.innerHTML += `<a href="${c.link}" target="_blank" class="nav-card card-${c.color}"><div class="icon">${c.icon}</div><div class="title">${c.title}</div><div class="desc">${c.desc}</div></a>`;
             });
         }
+        
+        // Admin panelinden değişiklik yapıldığında sayfayı tetikle
+        window.addEventListener('storage', renderHub);
         renderHub();
     </script>
 </body>
