@@ -87,15 +87,10 @@
                 const response = await fetch('watchparty.json');
                 globalData = await response.json();
                 renderGrid();
-            } catch (e) {
-                console.error("watchparty.json bulunamadı!");
-            }
+            } catch (e) { console.error("watchparty.json bulunamadı!"); }
         }
-
         function generateStars(rating) {
-            let starsHtml = '';
-            let floor = Math.floor(rating);
-            let half = (rating % 1) !== 0;
+            let starsHtml = ''; let floor = Math.floor(rating); let half = (rating % 1) !== 0;
             for (let i = 1; i <= 5; i++) {
                 if (i <= floor) starsHtml += '<i class="fa-solid fa-star"></i>';
                 else if (i === floor + 1 && half) starsHtml += '<i class="fa-solid fa-star-half-stroke"></i>';
@@ -103,10 +98,8 @@
             }
             return starsHtml;
         }
-
         function renderGrid() {
-            const grid = document.getElementById('watch-grid');
-            grid.innerHTML = '';
+            const grid = document.getElementById('watch-grid'); grid.innerHTML = '';
             let groupedMap = {};
             globalData.forEach(item => {
                 let gName = (item.groupName && item.groupName.trim() !== "") ? item.groupName.toUpperCase() : item.title.toUpperCase();
