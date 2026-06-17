@@ -84,12 +84,12 @@
 
         async function loadData() {
             try {
-                // Burada hata alırsan console'a yazdıracak
-                const response = await fetch('watchparty.json');
-                if (!response.ok) throw new Error("HTTP error " + response.status);
+                // Burada yolu belirttik, aynı klasörde olmalı
+                const response = await fetch('./watchparty.json'); 
+                if (!response.ok) throw new Error("Dosya bulunamadı: " + response.status);
                 globalData = await response.json();
                 renderGrid();
-            } catch (e) { console.error("watchparty.json yüklenemedi, hata:", e); }
+            } catch (e) { console.error("Hata:", e); }
         }
         function generateStars(rating) {
             let starsHtml = ''; let floor = Math.floor(rating); let half = (rating % 1) !== 0;
