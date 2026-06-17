@@ -1,0 +1,30 @@
+[
+    {
+        "image": "test",
+        "title": "TEST",
+        "groupName": "TEST",
+        "type": "anime",
+        "status": "devam",
+        "season": "1",
+        "current": 1,
+        "total": 12,
+        "startDate": "-",
+        "endDate": "-",
+        "rating": 0,
+        "note": ""
+    },
+    {
+        "groupName": "",
+        "image": "",
+        "title": "",
+        "type": "anime",
+        "status": "devam",
+        "season": "1",
+        "current": "1",
+        "total": "12",
+        "startDate": "",
+        "endDate": "",
+        "rating": "",
+        "note": ""
+    }
+]
