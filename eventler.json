@@ -1,0 +1,16 @@
+[
+    {
+        "title": "🍲 HARF ÇORBASI (WORD SCRAMBLE)",
+        "desc": "Hızlı olanın kazandığı, klavye hızının ve dikkatin test edildiği temel etkinliktir.",
+        "gameplay": "Bot, devasa kelime havuzundan seçtiği kelimeyi harflerini karıştırarak sohbete fırlatır.\n<span class=\"val-text\">Soru:</span> <span class=\"highlight\">\"G-A-L-Ü-T\"</span>\n<span class=\"val-text\">Doğru Cevap:</span> <span class=\"highlight\">\"LÜGAT\"</span>\nSohbete bu kelimeyi <span class=\"highlight\">HATASIZ</span> şekilde ilk yazan kişi ödülü kazanır.",
+        "reward": "Kazançlar kelimenin uzunluğu baz alınarak <span class=\"reward\">HARF BAŞINA 400 COIN</span> olarak mühürlenmiştir.\n<i>Örn: 5 harfli bir kelime bildiğinizde anında <span class=\"reward\">2.000 Coin</span> kazanırsınız.</i>",
+        "rules": "Sohbete yazılan cevaplarda <span class=\"danger\">İMLA HATASI</span> yapılması durumunda sistem cevabı kabul etmez. Kelimeyi eksik yazmak, harf hatası yapmak veya sonuna ek getirmek elenmenize sebep olur."
+    },
+    {
+        "title": "🎬 EMOJİ TAHMİN (PICTIONARY)",
+        "desc": "Görsel zekanın ve genel kültürün ön planda olduğu, 1000+ soruluk dev bir etkinliktir.",
+        "gameplay": "Bot; [KARAKTER], [FİLM], [DİZİ], [ANİME], [OYUN] veya [ATASÖZÜ] kategorisinden emojiler fırlatır.\nTahmini kolaylaştırmak için mesajın başında kategori bilgisi mutlaka belirtilir.\n\n<span class=\"highlight\">ÖRNEKLER:</span>\n<span class=\"val-text\">[KARAKTER]:</span> 🪓-🧔-⚔️ (Cevap: KRATOS)\n<span class=\"val-text\">[ANİME]:</span> 📓-🍎-💀 (Cevap: DEATH NOTE)\n<span class=\"val-text\">[ATASÖZÜ]:</span> 🍇-🍇-👁️ (Cevap: ÜZÜM ÜZÜME BAKA BAKA KARARIR)",
+        "reward": "Doğru cevabı sohbete ilk gönderen kişi anında <span class=\"reward\">2.500 COIN</span> kazanır.",
+        "rules": "Cevaplar tam ve eksiksiz olmalıdır. Atasözlerinde sıralama hayati önem taşır. Büyük/Küçük harf duyarlılığı yoktur ancak yazımın doğruluğu mecburidir."
+    }
+]

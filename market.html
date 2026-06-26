@@ -8,6 +8,7 @@
         :root { 
             --ana: #00f2ff; 
             --altin: #ffd700; 
+            --neon-pink: #e91e63;
             --bg: #06090f; 
             --font: 'Hemi Head', sans-serif; 
         }
@@ -19,7 +20,15 @@
             display: flex; 
             flex-direction: column; 
             align-items: center; 
+            min-height: 100vh;
         }
+
+        /* FİLTRE BUTONLARI İÇİN CSS (WATCHPARTY'DEN UYARLANDI) */
+        .controls-wrapper { display: flex; flex-direction: column; gap: 20px; width: 100%; margin-bottom: 40px; align-items: center; }
+        .filter-container { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .filter-btn { background: rgba(255, 255, 255, 0.02); border: 2px solid rgba(255, 255, 255, 0.1); color: white; font-size: 16px; font-style: italic; padding: 8px 20px; border-radius: 10px; cursor: pointer; letter-spacing: 1px; transition: all 0.3s; }
+        .filter-btn:hover, .filter-btn.active { border-color: var(--altin); box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); color: var(--altin); text-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
+
         .market-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
@@ -65,35 +74,72 @@
     </style>
 </head>
 <body>
-    <div style="text-align:center; margin-bottom:60px;">
+    <div style="text-align:center; margin-bottom:30px;">
         <h1 style="font-size:60px; color:var(--altin); margin:0;">SHANABOT MARKET</h1>
         <p style="color:var(--ana); letter-spacing:2px;">PUANLARINI HARCAMAK İÇİN CHATTE KOMUTUNU KULLAN</p>
     </div>
+
+    <div class="controls-wrapper">
+        <div class="filter-container" id="filter-container">
+            </div>
+    </div>
+
     <div id="reyon" class="market-grid"></div>
 
     <script>
-        const orijinalUrunler = [
-            { id: 1, ad: "Pokemon Kutusu", fiyat: "250.000", gif: "market/kutu.gif", desc: "Rastgele bir pokemon yakala.", cmd: "!pokemonkutusu" },
-            { id: 2, ad: "Youtube Shorts", fiyat: "25.000", gif: "market/shorts.gif", desc: "Maksimum 60 saniyelik Shorts.", cmd: "!shorts" },
-            { id: 3, ad: "Youtube Video", fiyat: "75.000", gif: "market/video.gif", desc: "Atmak istediğiniz videoyu komuttan sonra yazın. (Maksimum Süre 3 dakika 30 saniye)", cmd: "!video" },
-            { id: 4, ad: "Asma", fiyat: "150.000", gif: "market/asma.gif", desc: "Chattten birini 5dk boyunca timeoutlar. Şeyh Sait gibi ekranda asılır.", cmd: "!asma" },
-            { id: 5, ad: "Sula", fiyat: "7.500", gif: "market/sula.gif", desc: "Yayıncıya Su içir.", cmd: "!sula" },
-            { id: 6, ad: "Gif", fiyat: "2000", gif: "market/tenor.gif", desc: "attığınız tenor gifleri veya yazdığınız şey ekranda oynar. 30 Haziranda kapanacak", cmd: "!gif" },
-            { id: 7, ad: "Tiktok", fiyat: "35000", gif: "market/tiktok.gif", desc: "Tiktok videosu ekranda oynar.", cmd: "!tiktok" },  
-            { id: 8, ad: "Fal", fiyat: "500", gif: "market/fal.gif", desc: "Günlük falına baktır.", cmd: "!fal" }
-        ];
+        let globalMarketData = [];
+        let activeFilter = 'HEPSI';
 
+        async function loadData() {
+            try {
+                const response = await fetch('./market.json');
+                if (!response.ok) throw new Error("Dosya bulunamadı");
+                globalMarketData = await response.json();
+                renderFilters();
+                renderMarket();
+            } catch(e) { console.error("market.json yüklenemedi: ", e); }
+        }
+
+        // Grupları JSON'dan okuyup otomatik buton oluşturur
+        function renderFilters() {
+            const container = document.getElementById('filter-container');
+            
+            // Tüm benzersiz grupları topla (Grup yoksa "DİĞER" yap)
+            let groups = [...new Set(globalMarketData.map(item => item.group ? item.group.toUpperCase() : 'DİĞER'))];
+            
+            // Önce HEPSİ butonu
+            let html = `<button class="filter-btn active" onclick="filterType('HEPSI', this)">HEPSİ</button>`;
+            
+            // Sonra diğer grupların butonları
+            groups.forEach(g => {
+                if(g.trim() !== '') {
+                    html += `<button class="filter-btn" onclick="filterType('${g}', this)">${g}</button>`;
+                }
+            });
+            container.innerHTML = html;
+        }
+
+        // Filtreye tıklandığında çalışır
+        function filterType(type, btn) {
+            activeFilter = type;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderMarket();
+        }
+
+        // Reyonu ekrana basar (Kutu renklerini bir mavi bir kırmızı yapar)
         function renderMarket() {
             const reyon = document.getElementById('reyon');
             reyon.innerHTML = '';
             
-            if (localStorage.getItem('shana_market_data') === null) {
-                localStorage.setItem('shana_market_data', JSON.stringify(orijinalUrunler));
-            }
+            // Filtreleme işlemi
+            let filtered = activeFilter === 'HEPSI' 
+                ? globalMarketData 
+                : globalMarketData.filter(i => (i.group || 'DİĞER').toUpperCase() === activeFilter);
             
-            let aktifUrunler = JSON.parse(localStorage.getItem('shana_market_data'));
-            
-            aktifUrunler.forEach((u, index) => {
+            // Kartları çizdir
+            filtered.forEach((u, index) => {
+                // Renk mantığı: Çift sayılar mavi, tek sayılar kırmızı (orijinal isteğin)
                 let dinamikRenk = (index % 2 === 0) ? "#00f2ff" : "#ff4d4d";
 
                 reyon.innerHTML += `
@@ -109,7 +155,7 @@
             });
         }
         
-        renderMarket();
+        loadData();
     </script>
 </body>
 </html>

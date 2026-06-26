@@ -5,196 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shanabot | Sıkça Sorulanlar</title>
     <style>
-        @font-face {
-            font-family: 'Hemi Head';
-            src: url('hemi head bd it.ttf') format('truetype');
-            font-weight: bold;
-            font-style: italic;
-        }
-
-        :root { 
-            --neon-cyan: #00f2ff; 
-            --neon-gold: #ffd700; 
-            --neon-pink: #e91e63; 
-            --neon-green: #00ff88; 
-            --neon-purple: #bc13fe;
-            --bg-dark: #05070a;
-            --main-font: 'Hemi Head', sans-serif; 
-        }
-
-        body { 
-            background-color: var(--bg-dark); 
-            color: #fff; 
-            font-family: var(--main-font); 
-            margin: 0; 
-            display: flex; 
-            flex-direction: column;
-            align-items: center; 
-            min-height: 100vh;
-            background-image: radial-gradient(circle at center, #0d121d 0%, #05070a 100%);
-        }
-
-        header {
-            text-align: center;
-            padding: 40px 0;
-            width: 100%;
-            border-bottom: 2px solid var(--neon-cyan);
-            background: rgba(0,0,0,0.5);
-            position: relative;
-        }
-
-        header h1 {
-            font-size: 55px;
-            margin: 0;
-            text-shadow: 0 0 20px var(--neon-cyan);
-            letter-spacing: 3px;
-            font-style: italic;
-        }
-
-        .home-link {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            text-decoration: none;
-            color: var(--neon-cyan);
-            border: 1px solid var(--neon-cyan);
-            padding: 8px 15px;
-            border-radius: 5px;
-            font-size: 14px;
-            transition: 0.3s;
-        }
+        @font-face { font-family: 'Hemi Head'; src: url('hemi head bd it.ttf') format('truetype'); font-weight: bold; font-style: italic; }
+        :root { --neon-cyan: #00f2ff; --neon-gold: #ffd700; --neon-pink: #e91e63; --neon-green: #00ff88; --neon-purple: #bc13fe; --bg-dark: #05070a; --main-font: 'Hemi Head', sans-serif; }
+        body { background-color: var(--bg-dark); color: #fff; font-family: var(--main-font); margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; background-image: radial-gradient(circle at center, #0d121d 0%, #05070a 100%); }
+        header { text-align: center; padding: 40px 0; width: 100%; border-bottom: 2px solid var(--neon-cyan); background: rgba(0,0,0,0.5); position: relative; }
+        header h1 { font-size: 55px; margin: 0; text-shadow: 0 0 20px var(--neon-cyan); letter-spacing: 3px; font-style: italic; }
+        .home-link { position: absolute; top: 20px; right: 20px; text-decoration: none; color: var(--neon-cyan); border: 1px solid var(--neon-cyan); padding: 8px 15px; border-radius: 5px; font-size: 14px; transition: 0.3s; }
         .home-link:hover { background: var(--neon-cyan); color: var(--bg-dark); box-shadow: 0 0 15px var(--neon-cyan); }
-
-        @media (max-width: 600px) { 
-            header h1 { font-size: 30px; } 
-            .home-link { position: static; display: inline-block; margin-top: 10px; }
-        }
-
         .tab-nav { display: flex; gap: 10px; margin: 30px 0; flex-wrap: wrap; justify-content: center; }
-
-        .tab-btn {
-            background: #0d1117;
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #888;
-            padding: 12px 25px;
-            cursor: pointer;
-            font-family: var(--main-font);
-            font-size: 18px;
-            border-radius: 5px;
-            transition: 0.3s;
-            font-style: italic;
-        }
-
-        .tab-btn.active { 
-            color: var(--neon-cyan); 
-            border-color: var(--neon-cyan); 
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
-            background: rgba(0, 242, 255, 0.05);
-        }
-
-        .content-container {
-            width: 90%;
-            max-width: 1100px;
-            padding: 20px;
-            margin-bottom: 50px;
-        }
-
+        .tab-btn { background: #0d1117; border: 1px solid rgba(255,255,255,0.1); color: #888; padding: 12px 25px; cursor: pointer; font-family: var(--main-font); font-size: 18px; border-radius: 5px; transition: 0.3s; font-style: italic; }
+        .tab-btn.active { color: var(--neon-cyan); border-color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 242, 255, 0.3); background: rgba(0, 242, 255, 0.05); }
+        .content-container { width: 90%; max-width: 1100px; padding: 20px; margin-bottom: 50px; }
         .tab-content { display: none; animation: fadeIn 0.4s ease forwards; }
         .tab-content.active { display: block; }
-
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .terminal-box {
-            background: #0d1117;
-            border-left: 5px solid var(--neon-cyan);
-            padding: 25px;
-            margin-bottom: 25px;
-            border-radius: 4px;
-            position: relative;
-        }
-
-        .box-title {
-            display: block;
-            font-size: 24px;
-            color: #fff;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-            font-style: italic;
-        }
-
-        .box-text {
-            font-family: 'Segoe UI', sans-serif;
-            color: #aaa;
-            line-height: 1.8;
-            font-size: 16px;
-            margin: 0;
-        }
-
+        .terminal-box { background: #0d1117; border-left: 5px solid var(--neon-cyan); padding: 25px; margin-bottom: 25px; border-radius: 4px; }
+        .box-title { display: block; font-size: 24px; color: #fff; margin-bottom: 15px; letter-spacing: 1px; font-style: italic; }
+        .box-text { font-family: 'Segoe UI', sans-serif; color: #aaa; line-height: 1.8; font-size: 16px; margin: 0; }
         .val-text { color: var(--neon-cyan); font-weight: bold; }
         .sub-text { color: var(--neon-pink); font-weight: bold; }
         .gold-text { color: var(--neon-gold); font-weight: bold; }
         .purple-text { color: var(--neon-purple); font-weight: bold; }
         .important { color: #ff4d4d; font-weight: bold; text-decoration: underline; display: block; margin-bottom: 10px; }
-
         .border-cyan { border-left-color: var(--neon-cyan); }
         .border-gold { border-left-color: var(--neon-gold); }
         .border-green { border-left-color: var(--neon-green); }
         .border-pink { border-left-color: var(--neon-pink); }
         .border-purple { border-left-color: var(--neon-purple); }
-
-        .event-link-btn {
-            display: inline-block;
-            margin-top: 15px;
-            color: var(--neon-purple);
-            text-decoration: none;
-            border: 1px solid var(--neon-purple);
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-size: 16px;
-            transition: 0.3s;
-            font-style: italic;
-            font-weight: bold;
-        }
-        .event-link-btn:hover {
-            background: var(--neon-purple);
-            color: #fff;
-            box-shadow: 0 0 20px var(--neon-purple);
-        }
-
-        .gen-gallery { display: flex; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
-        .gen-card {
-            width: 200px;
-            cursor: pointer;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: 0.3s;
-        }
-        .gen-card:hover { border-color: var(--neon-green); transform: scale(1.05); }
-        .gen-card img { width: 100%; display: block; }
-        .gen-card span { display: block; text-align: center; padding: 10px; background: #111; font-size: 14px; color: var(--neon-green); font-weight: bold; letter-spacing: 2px; }
-
-        .modal {
-            display: none;
-            position: fixed; z-index: 1000;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); justify-content: center; align-items: center; cursor: zoom-out;
-        }
-        .modal img { max-width: 90%; max-height: 90%; border: 2px solid var(--neon-green); }
-
-        .exit-btn {
-            display: block;
-            width: fit-content;
-            margin: 20px auto;
-            color: var(--neon-pink);
-            border: 1px solid var(--neon-pink);
-            padding: 10px 25px;
-            text-decoration: none;
-            font-style: italic;
-            transition: 0.3s;
-        }
+        .exit-btn { display: block; width: fit-content; margin: 20px auto; color: var(--neon-pink); border: 1px solid var(--neon-pink); padding: 10px 25px; text-decoration: none; font-style: italic; transition: 0.3s; }
         .exit-btn:hover { background: var(--neon-pink); color: #fff; box-shadow: 0 0 20px var(--neon-pink); }
-
         .footer { padding: 40px; color: #333; letter-spacing: 4px; font-size: 11px; font-style: italic; text-align: center; }
     </style>
 </head>
@@ -205,154 +44,49 @@
         <h1>SHANABOT ÇOKÇA SORULANLAR</h1>
     </header>
 
-    <div class="tab-nav">
-        <button class="tab-btn active" onclick="openTab(event, 'puan')">PUAN SİSTEMİ</button>
-        <button class="tab-btn" onclick="openTab(event, 'pokemon')">POKÉMON</button>
-        <button class="tab-btn" onclick="openTab(event, 'basarim')">BAŞARIMLAR</button>
-    </div>
-
-    <div class="content-container">
-        
-        <div id="puan" class="tab-content active">
-            
-            <div class="terminal-box border-cyan">
-                <span class="box-title">💬 MESAJ BAŞINA PUAN</span>
-                <p class="box-text">
-                    Sohbet periyodu 30 saniye olarak ayarlanmıştır. Dakikada maksimum 2 mesajdan kazanç sağlayabilirsiniz. <br>
-                    Normal Kazanç: <span class="val-text">25 Coin</span> | Abone: <span class="sub-text">150 Coin</span>.
-                </p>
-            </div>
-
-            <div class="terminal-box border-gold">
-                <span class="box-title">✨ ABONELİK ÖDÜLÜ (SUB BONUS)</span>
-                <p class="box-text">
-                    <span class="gold-text">KENDİNE ABONELİK:</span> Abone olduğunuzda veya yenilediğinizde anında <span class="sub-text">15.000 COIN</span> kazanırsınız. <br>
-                    <span class="gold-text">HEDİYE GÖNDERİMİ:</span> Başka bir kullanıcıya abonelik hediye ettiğinizde, her bir abonelik için <span class="sub-text">15.000 COIN</span> doğrudan SİZİN hesabınıza tanımlanır.
-                </p>
-            </div>
-
-            <div class="terminal-box border-gold">
-                <span class="box-title">🏦 GİŞE MAAŞI (!MAAŞ)</span>
-                <p class="box-text">
-                    Botun çağrısından sonra ödemeyi onaylamak için tam <span class="val-text">30 SANİYE</span> süreniz bulunmaktadır. <br>
-                    Normal Ödeme: <span class="val-text">500 Birim</span> | Abone: <span class="sub-text">3.000 Birim</span>.
-                </p>
-            </div>
-
-            <div class="terminal-box border-pink">
-                <span class="box-title">📅 GÜNLÜK SADAKAT DÖNGÜSÜ (!GÜNLÜK)</span>
-                <p class="box-text">
-                    <span class="gold-text">BAZ ÖDÜL:</span> Normal <span class="val-text">500</span> | Abone <span class="sub-text">3.000 Coin</span>. <br>
-                    <span class="gold-text">ARTALIM:</span> Her gün Normal <span class="val-text">+250</span> | Abone <span class="sub-text">+1.500 Coin</span> artış gösterir. <br>
-                    Seri 7 gün üzerinden döner, gün atlandığında veya 7. gün dolduğunda sıfırlanır. <br>
-                    <i>* Kurucular normal üye statüsünde kazanç sağlar.</i>
-                </p>
-            </div>
-
-            <div class="terminal-box border-gold">
-                <span class="box-title">💸 PUAN TRANSFERİ (!GÖNDER)</span>
-                <p class="box-text">
-                    Coinlerinizi diğer kullanıcılara hediye edebilir veya ticaret yapabilirsiniz. <br>
-                    <span class="gold-text">KOMUT:</span> !gönder [kullanıcı_adı] [miktar] <br>
-                    <span class="val-text">Örnek:</span> !gönder shana 1000
-                </p>
-            </div>
-
-            <div class="terminal-box border-purple">
-                <span class="box-title">🔮 ÖNGÖRÜ SİSTEMİ (PREDICTIONS)</span>
-                <p class="box-text">
-                    Yayın olaylarına bahis yaparak yatırdığınızın tam <span class="val-text">4 KATINI (4x)</span> kazanın. <br>
-                    Seçenek sınırı yoktur. <br><br>
-                    <span class="purple-text">KOMUTLAR:</span><br>
-                    <span class="val-text">!öngör [seçenek] [puan]</span><br>
-                    <span class="gold-text">!bas [seçenek] [puan]</span>
-                </p>
-            </div>
-
-            <div class="terminal-box border-purple">
-                <span class="box-title">💜 PUAN ETKİNLİKLERİ (EVENT)</span>
-                <p class="box-text">
-                    Sohbet üzerinden katılabileceğiniz aktif etkinliklerin ve gelecek etkinliklerin tüm detayları için etkinlikler sayfasını ziyaret edin. <br><br>
-                    <a href="https://shanapanel.github.io/Shanabot/eventler.html" class="event-link-btn">➡️ ETKİNLİK DETAYLARI VE BİLGİ AL</a>
-                </p>
-            </div>
-        </div>
-
-        <div id="pokemon" class="tab-content">
-            <div class="terminal-box border-pink">
-                <span class="box-title" style="color: var(--neon-pink); text-shadow: 0 0 10px rgba(233, 30, 99, 0.3);">🔒 ERİŞİM KISITLAMASI // SADECE ABONELERE ÖZEL</span>
-                <p class="box-text">
-                    Sistem veri tabanında yapılan son optimizasyon protokolü uyarınca, Pokémon yönetim modülleri ve panel entegrasyon hakları <span class="sub-text">YALNIZCA ABONELERE</span> açık olacak şekilde güncellenmiştir. Abone statüsünde olmayan kullanıcılar yakalama komutlarını tetikleyemez ve koleksiyon paneline erişim sağlayamaz.
-                </p>
-            </div>
-
-            <div class="terminal-box border-green">
-                <span class="box-title">🔴 POKÉDEX ARŞİVİ</span>
-                <p class="box-text">
-                    Toplam <span class="val-text">386 POKÉMON</span> (Gen 1-3). Sayı güncellemelerle artacaktır. <br>
-                    Koleksiyonunuzu Pokedex sekmesinden <span class="val-text">yayın sonu / gün sonu güncellendiğinde</span> kontrol edebilirsiniz.
-                </p>
-            </div>
-
-            <div class="terminal-box border-gold">
-                <span class="box-title">🛰️ VAHŞİ POKÉMON AV PROTOKOLÜ</span>
-                <p class="box-text">
-                    <span class="gold-text">ORTAYA ÇIKIŞ:</span> 300-1200 saniye arası rastgele belirir. <br>
-                    <span class="gold-text">YAKALAMA:</span> Pokémon belirdikten sonra tam <span class="val-text">50 SANİYE</span> vaktiniz vardır. <br>
-                    <span class="important">DİKKAT:</span> Pokémon tek kişiliktir. Bir eğitmen yakalamaya başladığı an başkası müdahale edemez. <br>
-                    <span class="important">KOLEKSİYON:</span> Her eğitmen, her bir Pokémon'u koleksiyonuna sadece <span class="val-text">BİR KEZ</span> ekleyebilir. <br>
-                    <span class="gold-text">KİŞİSEL COOLDOWN:</span> !yakala kullanımı sonrası <span class="val-text">24 Saniye</span> beklenmelidir.
-                </p>
-            </div>
-
-            <div class="terminal-box border-cyan">
-                <span class="box-title">⚔️ TAKIM YÖNETİMİ VE SLOTLAR</span>
-                <p class="box-text">
-                    <span class="gold-text">SLOT ATAMA:</span> !slot[1-6] [Pokemon No] (Örn: !slot1 1) <br>
-                    <span class="gold-text">!pokeparty :</span> Aktif 6'lı takımınızı yayın ekranına yansıtır.
-                </p>
-            </div>
-
-            <div class="terminal-box border-cyan">
-                <span class="box-title">📖 POKÉDEX</span>
-                <p class="box-text">
-                    Koleksiyonunuzdaki Pokémonları nesillere göre listelemek ve tüm listeyi incelemek için aşağıdaki komutları kullanın: <br><br>
-                    <span class="val-text">!pokedex1 :</span> Nesil 1 Pokémonlarınızı listeler. <br>
-                    <span class="val-text">!pokedex2 :</span> Nesil 2 Pokémonlarınızı listeler. <br>
-                    <span class="val-text">!pokedex3 :</span> Nesil 3 Pokémonlarınızı listeler.
-                </p>
-                <div class="gen-gallery">
-                    <div class="gen-card" onclick="zoomImg('gen1.jpg')">
-                        <img src="gen1.jpg"><span>POKÉDEX1</span>
-                    </div>
-                    <div class="gen-card" onclick="zoomImg('gen2.jpg')">
-                        <img src="gen2.jpg"><span>POKÉDEX2</span>
-                    </div>
-                    <div class="gen-card" onclick="zoomImg('gen3.jpg')">
-                        <img src="gen3.jpg"><span>POKÉDEX3</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="basarim" class="tab-content">
-            <div class="terminal-box border-cyan">
-                <span class="box-title">🎖️ BAŞARIM VE SİSTEM BİLGİSİ</span>
-                <p class="box-text">
-                    Sistemdeki tüm ilerlemeleriniz belirli aralıklarla işlenmektedir. <br><br>
-                    <span class="important">GÜNCELLEME NOTU:</span> Başarımlar ve rütbe ilerlemeleri <span class="val-text">yayın sonu / gün sonu</span> veriler işlendiğinde panelinize yansımaktadır.
-                </p>
-            </div>
-        </div>
-
-        <a href="https://shanapanel.github.io/Shanabot/" target="_blank" class="exit-btn">← SİSTEMDEN ÇIKIŞ YAP</a>
-    </div>
-
-    <div id="imgModal" class="modal" onclick="this.style.display='none'"><img id="modalImg"></div>
-
+    <div class="tab-nav" id="tab-nav-container"></div>
+    <div class="content-container" id="tab-content-container"></div>
+    <a href="https://shanapanel.github.io/Shanabot/" target="_blank" class="exit-btn">← SİSTEMDEN ÇIKIŞ YAP</a>
     <div class="footer">SHANABOT SECURE CORE // v2.3.5 // ALL SYSTEMS OPERATIONAL</div>
 
     <script>
+        async function loadFaq() {
+            try {
+                const response = await fetch('./faq.json');
+                const faqData = await response.json();
+                renderFaq(faqData);
+            } catch(e) { console.error("faq.json yüklenemedi!"); }
+        }
+
+        function renderFaq(data) {
+            const navContainer = document.getElementById('tab-nav-container');
+            const contentContainer = document.getElementById('tab-content-container');
+            navContainer.innerHTML = '';
+            contentContainer.innerHTML = '';
+
+            let isFirst = true;
+
+            for (let tab in data) {
+                // Sekme Butonunu Ekle
+                navContainer.innerHTML += `<button class="tab-btn ${isFirst ? 'active' : ''}" onclick="openTab(event, '${tab.replace(/\s+/g, '')}')">${tab}</button>`;
+                
+                // Sekme İçeriğini (Kutuları) Ekle
+                let tabHtml = `<div id="${tab.replace(/\s+/g, '')}" class="tab-content ${isFirst ? 'active' : ''}">`;
+                
+                data[tab].forEach(item => {
+                    tabHtml += `
+                        <div class="terminal-box ${item.color}">
+                            <span class="box-title">${item.title}</span>
+                            <p class="box-text">${item.content}</p>
+                        </div>`;
+                });
+                
+                tabHtml += `</div>`;
+                contentContainer.innerHTML += tabHtml;
+                isFirst = false;
+            }
+        }
+
         function openTab(evt, tabName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tab-content");
@@ -368,11 +102,8 @@
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.className += " active";
         }
-
-        function zoomImg(src) {
-            document.getElementById('imgModal').style.display = 'flex';
-            document.getElementById('modalImg').src = src;
-        }
+        
+        loadFaq();
     </script>
 </body>
 </html>

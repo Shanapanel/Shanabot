@@ -1,0 +1,68 @@
+{
+    "PUAN": [
+        {
+            "title": "💬 MESAJ BAŞINA PUAN",
+            "color": "border-cyan",
+            "content": "Sohbet periyodu 30 saniye olarak ayarlanmıştır. Dakikada maksimum 2 mesajdan kazanç sağlayabilirsiniz. <br>Normal Kazanç: <span class=\"val-text\">25 Coin</span> | Abone: <span class=\"sub-text\">150 Coin</span>."
+        },
+        {
+            "title": "✨ ABONELİK ÖDÜLÜ (SUB BONUS)",
+            "color": "border-gold",
+            "content": "<span class=\"gold-text\">KENDİNE ABONELİK:</span> Abone olduğunuzda veya yenilediğinizde anında <span class=\"sub-text\">15.000 COIN</span> kazanırsınız. <br><span class=\"gold-text\">HEDİYE GÖNDERİMİ:</span> Başka bir kullanıcıya abonelik hediye ettiğinizde, her bir abonelik için <span class=\"sub-text\">15.000 COIN</span> doğrudan SİZİN hesabınıza tanımlanır."
+        },
+        {
+            "title": "🏦 GİŞE MAAŞI",
+            "color": "border-pink",
+            "content": "Botun çağrısından sonra ödemeyi onaylamak için tam <span class=\"val-text\">30 SANİYE</span> süreniz bulunmaktadır. <br>\n                    Normal Ödeme: <span class=\"val-text\">500 Birim</span> | Abone: <span class=\"sub-text\">3.000 Birim</span>."
+        },
+        {
+            "title": "💸 PUAN TRANSFERİ",
+            "color": "border-green",
+            "content": "Coinlerinizi diğer kullanıcılara hediye edebilir veya ticaret yapabilirsiniz. (%5 vergi kesilir.) <br>\n                    <span class=\"gold-text\">KOMUT:</span> !gönder [kullanıcı_adı] [miktar] <br>\n                    <span class=\"val-text\">Örnek:</span> !gönder shana 1000"
+        },
+        {
+            "title": "🔮 ÖNGÖRÜ SİSTEMİ",
+            "color": "border-purple",
+            "content": "Yayın olaylarına bahis yaparak yatırdığınızın tam <span class=\"val-text\">4 KATINI (4x)</span> kazanın. <br>\n                    Seçenek sınırı yoktur. <br><br>\n                    <span class=\"purple-text\">KOMUTLAR:</span><br>\n                    <span class=\"val-text\">!öngör [seçenek] [puan]</span><br>\n                    <span class=\"gold-text\">!bas [seçenek] [puan]</span>"
+        },
+        {
+            "title": "💜 PUAN ETKİNLİKLERİ",
+            "color": "border-purple",
+            "content": "Sohbet üzerinden katılabileceğiniz aktif etkinliklerin ve gelecek etkinliklerin tüm detayları için etkinlikler sayfasını ziyaret edin. <br><br>\n                    <a href=\"https://shanapanel.github.io/Shanabot/eventler.html\" class=\"event-link-btn\">➡️ ETKİNLİK DETAYLARI VE BİLGİ AL</a>"
+        }
+    ],
+    "POKEMON": [
+        {
+            "title": "🔒 ERİŞİM KISITLAMASI // SADECE ABONELERE ÖZEL",
+            "color": "border-pink",
+            "content": "Sistem veri tabanında yapılan son optimizasyon protokolü uyarınca, Pokémon yönetim modülleri ve panel entegrasyon hakları <span class=\"sub-text\">YALNIZCA ABONELERE</span> açık olacak şekilde güncellenmiştir. Abone statüsünde olmayan kullanıcılar yakalama komutlarını tetikleyemez ve koleksiyon paneline erişim sağlayamaz."
+        },
+        {
+            "title": "🔴 POKÉDEX ARŞİVİ",
+            "color": "border-green",
+            "content": "Toplam <span class=\"val-text\">386 POKÉMON</span> (Gen 1-3). Sayı güncellemelerle artacaktır. <br>Koleksiyonunuzu Pokedex sekmesinden <span class=\"val-text\">yayın sonu / gün sonu güncellendiğinde</span> kontrol edebilirsiniz."
+        },
+        {
+            "title": "🛰️ VAHŞİ POKÉMON AV PROTOKOLÜ",
+            "color": "border-gold",
+            "content": "<span class=\"gold-text\">ORTAYA ÇIKIŞ:</span> 300-1200 saniye arası rastgele belirir. <br>\n                    <span class=\"gold-text\">YAKALAMA:</span> Pokémon belirdikten sonra tam <span class=\"val-text\">50 SANİYE</span> vaktiniz vardır. <br>\n                    <span class=\"important\">DİKKAT:</span> Pokémon tek kişiliktir. Bir eğitmen yakalamaya başladığı an başkası müdahale edemez. <br>\n                    <span class=\"important\">KOLEKSİYON:</span> Her eğitmen, her bir Pokémon'u koleksiyonuna sadece <span class=\"val-text\">BİR KEZ</span> ekleyebilir. <br>\n                    <span class=\"gold-text\">KİŞİSEL COOLDOWN:</span> !yakala kullanımı sonrası <span class=\"val-text\">24 Saniye</span> beklenmelidir."
+        },
+        {
+            "title": "⚔️ TAKIM YÖNETİMİ VE SLOTLAR",
+            "color": "border-cyan",
+            "content": "<span class=\"gold-text\">SLOT ATAMA:</span> !slot[1-6] [Pokemon No] (Örn: !slot1 1) <br>\n                    <span class=\"gold-text\">!pokeparty :</span> Aktif 6'lı takımınızı yayın ekranına yansıtır."
+        },
+        {
+            "title": "📖 POKÉDEX",
+            "color": "border-cyan",
+            "content": "Koleksiyonunuzdaki Pokémonları nesillere göre listelemek ve tüm listeyi incelemek için aşağıdaki komutları kullanın: <br><br>\n                    <span class=\"val-text\">!pokedex1 :</span> Nesil 1 Pokémonlarınızı listeler. <br>\n                    <span class=\"val-text\">!pokedex2 :</span> Nesil 2 Pokémonlarınızı listeler. <br>\n                    <span class=\"val-text\">!pokedex3 :</span> Nesil 3 Pokémonlarınızı listeler.\n                </p>\n                <div class=\"gen-gallery\">\n                    <div class=\"gen-card\" onclick=\"zoomImg('gen1.jpg')\">\n                        <img src=\"gen1.jpg\"><span>POKÉDEX1</span>\n                    </div>\n                    <div class=\"gen-card\" onclick=\"zoomImg('gen2.jpg')\">\n                        <img src=\"gen2.jpg\"><span>POKÉDEX2</span>\n                    </div>\n                    <div class=\"gen-card\" onclick=\"zoomImg('gen3.jpg')\">\n                        <img src=\"gen3.jpg\"><span>POKÉDEX3</span>"
+        }
+    ],
+    "BAŞARIMLAR": [
+        {
+            "title": "🎖️ BAŞARIM VE SİSTEM BİLGİSİ",
+            "color": "border-cyan",
+            "content": "Sistemdeki tüm ilerlemeleriniz belirli aralıklarla işlenmektedir. <br><br>\n                    <span class=\"important\">GÜNCELLEME NOTU:</span> Başarımlar ve rütbe ilerlemeleri <span class=\"val-text\">yayın sonu / gün sonu</span> veriler işlendiğinde panelinize yansımaktadır."
+        }
+    ]
+}

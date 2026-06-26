@@ -2,24 +2,16 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Shanabot Veri Sistemi</title>
+    <title>Shanapanel Veri Sistemi</title>
     <script id="dataScript" src="veriler.js"></script>
     <style>
-        /* Fontu Yerel Dosyadan Tanımlıyoruz */
-        @font-face {
-            font-family: 'Hemi Head';
-            src: url('hemi head bd it.ttf') format('truetype');
-            font-weight: bold;
-            font-style: italic;
-        }
-
         :root { 
             --neon-cyan: #00f2ff; 
             --neon-gold: #ffd700; 
             --neon-green: #00ff88; 
             --bg-dark: #06090f; 
             --card-bg: #11151c; 
-            --main-font: 'Hemi Head', sans-serif; 
+            --main-font: 'Hemi Head', 'Segoe UI', sans-serif; 
         }
 
         body { 
@@ -36,12 +28,17 @@
         #sidebar { width: 300px; background: #0a0d14; border-right: 2px solid var(--neon-cyan); padding: 25px; overflow-y: auto; }
         .user-btn { padding: 15px; margin-bottom: 12px; background: var(--card-bg); border-radius: 10px; cursor: pointer; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
         .user-btn.active { border-color: var(--neon-cyan); background: #161b25; box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); }
-        .user-btn h3 { margin: 0; font-size: 18px; color: var(--neon-cyan); letter-spacing: 1px; font-style: italic; }
+        .user-btn h3 { margin: 0; font-size: 18px; color: var(--neon-cyan); letter-spacing: 1px; }
         
         /* Sağ Ekran - Pokedex Stili */
         #main-view { flex: 1; padding: 30px; overflow-y: auto; background: radial-gradient(circle at top right, #0d121d, #06090f); }
         .header-box { background: rgba(255,255,255,0.02); padding: 25px; border-radius: 12px; border: 1px solid rgba(0, 242, 255, 0.2); margin-bottom: 20px; }
-        .profile-title { font-size: 42px; text-shadow: 0 0 15px var(--neon-cyan); letter-spacing: 3px; margin: 0; color: #fff; font-style: italic; }
+        .profile-title { font-size: 42px; text-shadow: 0 0 15px var(--neon-cyan); letter-spacing: 3px; margin: 0; color: #fff; }
+
+        /* ARAMA KUTUSU */
+        .search-container { margin-bottom: 20px; position: relative; }
+        .search-input { width: 100%; padding: 12px 20px; background: rgba(255, 255, 255, 0.02); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 10px; color: white; font-family: var(--main-font); font-size: 14px; box-sizing: border-box; transition: 0.3s; letter-spacing: 1px; }
+        .search-input:focus { border-color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); outline: none; }
 
         /* BAŞARIM LİSTESİ */
         .badge-list { display: flex; flex-direction: column; gap: 10px; }
@@ -54,9 +51,10 @@
             border: 1px solid rgba(255,255,255,0.03); 
             transition: 0.4s; 
             filter: grayscale(1); 
-            opacity: 0.15; 
+            opacity: 0.4; /* Kapalı başarımların okunabilirliğini artırdım */
         }
         
+        /* Kazanılan Başarım Parlaması - Cyan Mode */
         .badge-row.owned { 
             filter: grayscale(0); 
             opacity: 1; 
@@ -67,11 +65,11 @@
 
         .badge-icon { font-size: 32px; width: 60px; text-align: center; margin-right: 20px; filter: drop-shadow(0 0 5px rgba(0, 242, 255, 0.5)); }
         .badge-info { flex: 1; }
-        .badge-name { display: block; font-size: 16px; color: var(--neon-cyan); letter-spacing: 2px; font-weight: bold; margin-bottom: 3px; font-style: italic; }
-        .badge-desc { display: block; font-size: 12px; color: #555; font-family: 'Segoe UI', sans-serif; letter-spacing: 0.5px; font-style: normal; }
+        .badge-name { display: block; font-size: 16px; color: var(--neon-cyan); letter-spacing: 2px; font-weight: bold; margin-bottom: 3px; }
+        .badge-desc { display: block; font-size: 12px; color: #777; font-family: 'Segoe UI'; letter-spacing: 0.5px; }
         .owned .badge-desc { color: #aaa; }
         
-        .status-tag { font-size: 10px; padding: 4px 10px; border-radius: 4px; background: #222; color: #444; letter-spacing: 1px; font-weight: bold; font-style: italic; }
+        .status-tag { font-size: 10px; padding: 4px 10px; border-radius: 4px; background: #222; color: #444; letter-spacing: 1px; font-weight: bold; }
         .owned .status-tag { background: var(--neon-cyan); color: #000; box-shadow: 0 0 10px var(--neon-cyan); }
         .owned .badge-name { color: var(--neon-gold); text-shadow: 0 0 5px rgba(255, 215, 0, 0.3); }
 
@@ -81,22 +79,27 @@
 </head>
 <body>
     <div id="sidebar">
-        <h2 style="color: var(--neon-cyan); text-align: center; letter-spacing: 2px; margin-bottom: 30px; font-style: italic;">SİSTEM ÜYELERİ</h2>
+        <h2 style="color: var(--neon-cyan); text-align: center; letter-spacing: 2px; margin-bottom: 30px;">SİSTEM ÜYELERİ</h2>
         <div id="userList"></div>
     </div>
     
     <div id="main-view">
         <div id="welcome" style="text-align: center; margin-top: 150px; opacity: 0.2;">
-            <h1 style="letter-spacing: 3px; color: var(--neon-cyan); font-style: italic;">ERİŞİM İÇİN PROFİL SEÇİN</h1>
+            <h1 style="letter-spacing: 3px; color: var(--neon-cyan);">ERİŞİM İÇİN PROFİL SEÇİN</h1>
         </div>
 
         <div id="details" style="display: none;">
             <div class="header-box">
                 <div id="d-name" class="profile-title">---</div>
-                <div id="sync-time" style="color: var(--neon-cyan); font-size: 11px; margin-top: 5px; opacity: 0.6; letter-spacing: 1px; font-family: 'Segoe UI'; font-style: normal;"></div>
+                <div id="sync-time" style="color: var(--neon-cyan); font-size: 11px; margin-top: 5px; opacity: 0.6; letter-spacing: 1px;"></div>
             </div>
 
-            <h3 style="color: var(--neon-gold); font-size: 14px; margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; font-style: italic;">Arşivlenmiş Başarımlar ve Veri Kayıtları</h3>
+            <h3 style="color: var(--neon-gold); font-size: 14px; margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase;">Arşivlenmiş Başarımlar ve Veri Kayıtları</h3>
+            
+            <div class="search-container">
+                <input type="text" id="badge-search" class="search-input" placeholder="Başarım ara (Örn: Maaş, Transfer, Gece)..." oninput="filterBadges()">
+            </div>
+
             <div id="badgeList" class="badge-list"></div>
         </div>
     </div>
@@ -178,6 +181,9 @@
             document.getElementById('details').style.display = 'block';
             document.getElementById('d-name').innerText = u.userName;
             
+            // Arama kutusunu temizle her profil değişiminde
+            document.getElementById('badge-search').value = '';
+            
             const bListArea = document.getElementById('badgeList');
             bListArea.innerHTML = '';
             
@@ -197,6 +203,21 @@
                     <div class="status-tag">${isOwned ? 'ACTIVE' : 'LOCKED'}</div>
                 `;
                 bListArea.appendChild(bRow);
+            });
+        }
+
+        // Filtreleme Fonksiyonu
+        function filterBadges() {
+            const query = document.getElementById('badge-search').value.toLowerCase();
+            const rows = document.querySelectorAll('.badge-row');
+            
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                if(text.includes(query)) {
+                    row.style.display = 'flex';
+                } else {
+                    row.style.display = 'none';
+                }
             });
         }
 
