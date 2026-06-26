@@ -22,16 +22,13 @@
         .terminal-box { background: #0d1117; border-left: 5px solid var(--neon-cyan); padding: 25px; margin-bottom: 25px; border-radius: 4px; }
         .box-title { display: block; font-size: 24px; color: #fff; margin-bottom: 15px; letter-spacing: 1px; font-style: italic; }
         .box-text { font-family: 'Segoe UI', sans-serif; color: #aaa; line-height: 1.8; font-size: 16px; margin: 0; }
-        .val-text { color: var(--neon-cyan); font-weight: bold; }
-        .sub-text { color: var(--neon-pink); font-weight: bold; }
-        .gold-text { color: var(--neon-gold); font-weight: bold; }
-        .purple-text { color: var(--neon-purple); font-weight: bold; }
-        .important { color: #ff4d4d; font-weight: bold; text-decoration: underline; display: block; margin-bottom: 10px; }
-        .border-cyan { border-left-color: var(--neon-cyan); }
-        .border-gold { border-left-color: var(--neon-gold); }
-        .border-green { border-left-color: var(--neon-green); }
-        .border-pink { border-left-color: var(--neon-pink); }
-        .border-purple { border-left-color: var(--neon-purple); }
+        
+        /* RESİM DÜZENLEMELERİ */
+        .gen-card img { width: 150px; height: auto; border: 1px solid var(--neon-cyan); border-radius: 5px; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .gen-card img:hover { transform: scale(1.05); border-color: var(--neon-pink); }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
+        .modal img { max-width: 90%; max-height: 90%; border: 2px solid var(--neon-cyan); }
+        
         .exit-btn { display: block; width: fit-content; margin: 20px auto; color: var(--neon-pink); border: 1px solid var(--neon-pink); padding: 10px 25px; text-decoration: none; font-style: italic; transition: 0.3s; }
         .exit-btn:hover { background: var(--neon-pink); color: #fff; box-shadow: 0 0 20px var(--neon-pink); }
         .footer { padding: 40px; color: #333; letter-spacing: 4px; font-size: 11px; font-style: italic; text-align: center; }
@@ -47,6 +44,12 @@
     <div class="tab-nav" id="tab-nav-container"></div>
     <div class="content-container" id="tab-content-container"></div>
     <a href="https://shanapanel.github.io/Shanabot/" target="_blank" class="exit-btn">← SİSTEMDEN ÇIKIŞ YAP</a>
+    
+    <!-- Modal Penceresi -->
+    <div id="imageModal" class="modal" onclick="this.style.display='none'">
+        <img id="modalImg">
+    </div>
+
     <div class="footer">SHANABOT SECURE CORE // v2.3.5 // ALL SYSTEMS OPERATIONAL</div>
 
     <script>
@@ -63,22 +66,14 @@
             const contentContainer = document.getElementById('tab-content-container');
             navContainer.innerHTML = '';
             contentContainer.innerHTML = '';
-
             let isFirst = true;
 
             for (let tab in data) {
-                // Sekme Butonunu Ekle
                 navContainer.innerHTML += `<button class="tab-btn ${isFirst ? 'active' : ''}" onclick="openTab(event, '${tab.replace(/\s+/g, '')}')">${tab}</button>`;
-                
-                // Sekme İçeriğini (Kutuları) Ekle
                 let tabHtml = `<div id="${tab.replace(/\s+/g, '')}" class="tab-content ${isFirst ? 'active' : ''}">`;
                 
                 data[tab].forEach(item => {
-                    tabHtml += `
-                        <div class="terminal-box ${item.color}">
-                            <span class="box-title">${item.title}</span>
-                            <p class="box-text">${item.content}</p>
-                        </div>`;
+                    tabHtml += `<div class="terminal-box ${item.color}"><span class="box-title">${item.title}</span><p class="box-text">${item.content}</p></div>`;
                 });
                 
                 tabHtml += `</div>`;
@@ -90,17 +85,19 @@
         function openTab(evt, tabName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-                tabcontent[i].classList.remove("active");
-            }
+            for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; tabcontent[i].classList.remove("active"); }
             tablinks = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
+            for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); }
             document.getElementById(tabName).style.display = "block";
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.className += " active";
+        }
+
+        function zoomImg(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            modal.style.display = 'flex';
+            modalImg.src = src;
         }
         
         loadFaq();
