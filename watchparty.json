@@ -54,5 +54,19 @@
         "endDate": "",
         "rating": "",
         "note": ""
+    },
+    {
+        "groupName": "AIRPLANE(1980)",
+        "image": "https://m.media-amazon.com/images/M/MV5BNGMxMDRhMjItMDNlZi00MDIzLWE5MDQtODljMDQ3MWM1Y2E4XkEyXkFqcGc@._V1_.jpg",
+        "title": "AIRPLANE(1980)",
+        "type": "film",
+        "status": "bitti",
+        "season": "1",
+        "current": "1",
+        "total": "12",
+        "startDate": "04.07.2026",
+        "endDate": "04.07.2026",
+        "rating": "3.5",
+        "note": "ZAZ komedi türünün ilk filmi ingilizce bilenler için güzel kelime oyunları barındıran absürt komedi"
     }
 ]
