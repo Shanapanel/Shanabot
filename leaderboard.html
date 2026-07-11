@@ -85,20 +85,21 @@
     <div class="content-container">
         <div class="terminal-box">
             <span class="box-title">🏆 EVENT KRALLARI (TOP 25)</span>
-            <p class="box-text">Harf Çorbası ve Emoji Tahmin etkinliklerinde en yüksek skoru yapan elit kullanıcılar.</p>
+            <p class="box-text">Harf Çorbası, Emoji Tahmin ve Film quizi etkinliklerinde en yüksek skoru yapan elit kullanıcılar.</p>
             
             <table class="leaderboard-table">
                 <thead>
                     <tr>
                         <th style="width: 80px;">SIRA</th>
                         <th>KULLANICI</th>
-                        <th style="text-align:center;">HARF ÇORBASI (BİLİNEN)</th>
-                        <th style="text-align:center;">EMOJİ TAHMİN (BİLİNEN)</th>
+                        <th style="text-align:center;">HARF ÇORBASI</th>
+                        <th style="text-align:center;">EMOJİ TAHMİN</th>
+                        <th style="text-align:center;">FİLM OYUNU</th>
                         <th style="text-align:right;">TOPLAM KAZANÇ</th>
                     </tr>
                 </thead>
                 <tbody id="leaderboard-body">
-                    </tbody>
+                </tbody>
             </table>
         </div>
     </div>
@@ -112,12 +113,8 @@
             const tbody = document.getElementById('leaderboard-body');
             const syncTime = document.getElementById('sync-time');
 
-            // 1. Veri kontrolü
             if (typeof leaderData !== 'undefined') {
-                // Son güncelleme zamanını bas
                 syncTime.innerText = leaderData.updateTime;
-
-                // 2. Tabloyu temizle ve doldur
                 tbody.innerHTML = ''; 
 
                 leaderData.topUsers.forEach((user, index) => {
@@ -125,10 +122,12 @@
                     let rankClass = '';
                     let medal = '';
 
-                    // İlk 3 için özel stil ve madalya
                     if (rank === 1) { rankClass = 'rank-1'; medal = ' 🥇'; }
                     else if (rank === 2) { rankClass = 'rank-2'; medal = ' 🥈'; }
                     else if (rank === 3) { rankClass = 'rank-3'; medal = ' 🥉'; }
+
+                    // Veritabanından film verisi gelmezse varsayılan olarak 0 basar
+                    const movieWins = user.tawmae_userCorrectGuesses_MOVIE_AND_TV_SHOW_QUIZ || 0;
 
                     const row = `
                         <tr>
@@ -136,13 +135,14 @@
                             <td class="user-name">${user.userName}</td>
                             <td class="stat-val">${user.soupWins}</td>
                             <td class="stat-val">${user.emojiWins}</td>
+                            <td class="stat-val">${movieWins}</td>
                             <td class="total-gold">${user.gold.toLocaleString('tr-TR')}</td>
                         </tr>
                     `;
                     tbody.innerHTML += row;
                 });
             } else {
-                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:50px;">VERİ DOSYASI (leader_data.js) BULUNAMADI!</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:50px;">VERİ DOSYASI (leader_data.js) BULUNAMADI!</td></tr>';
             }
         });
     </script>
