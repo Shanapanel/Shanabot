@@ -99,48 +99,86 @@
                 else starsHtml += '<i class="fa-regular fa-star" style="opacity:0.1"></i>';
             }
             return starsHtml;
+       function renderGrid() {
+    const grid = document.getElementById('watch-grid'); 
+    grid.innerHTML = '';
+    let groupedMap = {};
+    
+    globalData.forEach(item => {
+        let gName = (item.groupName && item.groupName.trim() !== "") ? item.groupName.toUpperCase() : item.title.toUpperCase();
+        if (!groupedMap[gName]) groupedMap[gName] = [];
+        groupedMap[gName].push(item);
+    });
+    
+    let cardIndex = 0;
+    for (let gName in groupedMap) {
+        let items = groupedMap[gName];
+        if (activeFilter !== 'hepsi' && items[0].type !== activeFilter) continue;
+        if (searchQuery !== '' && !gName.includes(searchQuery)) continue;
+        
+        items.sort((a, b) => (parseFloat(a.season) || 0) - (parseFloat(b.season) || 0));
+        
+        let totalCurrent = 0, totalMax = 0, hasDevam = false, hasPlan = false, hasAra = false, hasBıraktı = false, hasBitti = false;
+        
+        items.forEach(item => {
+            totalCurrent += parseInt(item.current) || 0; 
+            totalMax += parseInt(item.total) || 0;
+            if (item.status === "devam") hasDevam = true; 
+            if (item.status === "plan") hasPlan = true;
+            if (item.status === "ara") hasAra = true; 
+            if (item.status === "bıraktı") hasBıraktı = true;
+            if (item.status === "bitti" || item.type === "film") hasBitti = true;
+        });
+        
+        let percentage = totalMax > 0 ? Math.min(Math.round((totalCurrent / totalMax) * 100), 100) : 0;
+        let badgeClass = "status-badge continue-badge", badgeText = "DEVAM EDIYOR", barClass = "progress-bar-fill";
+        
+        if (percentage === 100 || (hasBitti && !hasDevam && !hasAra)) { 
+            badgeClass = "status-badge complete-badge"; badgeText = "BITTI"; barClass = "progress-bar-fill progress-complete"; 
+        } else if (hasBıraktı && !hasDevam) { 
+            badgeClass = "status-badge drop-badge"; badgeText = "BIRAKILDI"; barClass = "progress-bar-fill progress-drop"; 
+        } else if (hasAra && !hasDevam) { 
+            badgeClass = "status-badge pause-badge"; badgeText = "ARA VERILDI"; 
+        } else if (hasPlan && !hasDevam && !hasBitti) { 
+            badgeClass = "status-badge plan-badge"; badgeText = "PLANLANIYOR"; 
         }
-        function renderGrid() {
-            const grid = document.getElementById('watch-grid'); grid.innerHTML = '';
-            let groupedMap = {};
-            globalData.forEach(item => {
-                let gName = (item.groupName && item.groupName.trim() !== "") ? item.groupName.toUpperCase() : item.title.toUpperCase();
-                if (!groupedMap[gName]) groupedMap[gName] = [];
-                groupedMap[gName].push(item);
-            });
-            let cardIndex = 0;
-            for (let gName in groupedMap) {
-                let items = groupedMap[gName];
-                if (activeFilter !== 'hepsi' && items[0].type !== activeFilter) continue;
-                if (searchQuery !== '' && !gName.includes(searchQuery)) continue;
-                items.sort((a, b) => (parseFloat(a.season) || 0) - (parseFloat(b.season) || 0));
-                let totalCurrent = 0, totalMax = 0, hasDevam = false, hasPlan = false, hasAra = false, hasBıraktı = false, hasBitti = false;
-                items.forEach(item => {
-                    totalCurrent += parseInt(item.current) || 0; totalMax += parseInt(item.total) || 0;
-                    if (item.status === "devam") hasDevam = true; if (item.status === "plan") hasPlan = true;
-                    if (item.status === "ara") hasAra = true; if (item.status === "bıraktı") hasBıraktı = true;
-                    if (item.status === "bitti" || item.type === "film") hasBitti = true;
-                });
-                let percentage = totalMax > 0 ? Math.min(Math.round((totalCurrent / totalMax) * 100), 100) : 0;
-                let badgeClass = "status-badge continue-badge", badgeText = "DEVAM EDIYOR", barClass = "progress-bar-fill";
-                if (percentage === 100 || (hasBitti && !hasDevam && !hasAra)) { badgeClass = "status-badge complete-badge"; badgeText = "BITTI"; barClass = "progress-bar-fill progress-complete"; }
-                else if (hasBıraktı && !hasDevam) { badgeClass = "status-badge drop-badge"; badgeText = "BIRAKILDI"; barClass = "progress-bar-fill progress-drop"; }
-                else if (hasAra && !hasDevam) { badgeClass = "status-badge pause-badge"; badgeText = "ARA VERILDI"; }
-                else if (hasPlan && !hasDevam && !hasBitti) { badgeClass = "status-badge plan-badge"; badgeText = "PLANLANIYOR"; }
-                let subItemsHtml = '';
-                items.forEach(sub => {
-                    let subPerc = sub.type === "film" || sub.status === "bitti" ? 100 : Math.min(Math.round((sub.current / sub.total) * 100), 100);
-                    let subBadgeText = sub.status === "bitti" || sub.type === "film" ? "BİTTİ" : sub.status.toUpperCase();
-                    if(sub.status === "ara") subBadgeText = "MOLA"; if(sub.status === "plan") subBadgeText = "YAKINDA";
-                    let subBadgeStyle = "color: var(--neon-gold);";
-                    if (subPerc === 100) subBadgeStyle = "color: var(--neon-green);"; if (sub.status === "plan") subBadgeStyle = "color: var(--neon-purple);"; if (sub.status === "bıraktı") subBadgeStyle = "color: var(--neon-pink);";
-                    let subDateText = sub.status === "plan" ? `Hedef: ${sub.startDate}` : `Başlangıç: ${sub.startDate} | Bitiş: ${sub.endDate}`;
-                    subItemsHtml += `<div class="season-row-item"><div class="season-row-header"><span class="season-row-name">${sub.type === 'film' ? 'TEK PARÇA FİLM' : 'SEZON ' + sub.season}</span><div class="mini-stars">${generateStars(sub.rating || 0)}</div><span class="mini-badge" style="${subBadgeStyle}">${subBadgeText} (${sub.current}/${sub.total})</span></div><div class="season-row-dates">${subDateText}</div>${sub.note ? `<div class="season-row-note">${sub.note}</div>` : ''}</div>`;
-                });
-                grid.innerHTML += `<div class="nav-card" id="card-${cardIndex}" style="background-image: url('${items[0].image || 'https://via.placeholder.com/230x350/000'}')" onclick="expandCard(${cardIndex}, event)"><div class="card-main"><div class="${badgeClass}">${badgeText}</div><div class="progress-wrapper"><div class="title">${gName}</div><div class="progress-text"><span>${items.length} ÖĞE / SEZON</span><span>%${percentage}</span></div><div class="progress-bar-bg"><div class="${barClass}" style="width: ${percentage}%"></div></div></div></div><div class="card-details"><div class="detail-header">İZLEME BİLGİSİ</div><div class="seasons-scroll-list">${subItemsHtml}</div></div></div>`;
-                cardIndex++;
-            }
-        }
+        
+        // Burayı değiştirdik: "ÖĞE" yerine dinamik etiket
+        let labelText = (items[0].type === "film") ? "1 FİLM" : items.length + " SEZON";
+        
+        let subItemsHtml = '';
+        items.forEach(sub => {
+            let subPerc = sub.type === "film" || sub.status === "bitti" ? 100 : Math.min(Math.round((sub.current / sub.total) * 100), 100);
+            let subBadgeText = sub.status === "bitti" || sub.type === "film" ? "BİTTİ" : sub.status.toUpperCase();
+            if(sub.status === "ara") subBadgeText = "MOLA"; if(sub.status === "plan") subBadgeText = "YAKINDA";
+            let subBadgeStyle = "color: var(--neon-gold);";
+            if (subPerc === 100) subBadgeStyle = "color: var(--neon-green);"; if (sub.status === "plan") subBadgeStyle = "color: var(--neon-purple);"; if (sub.status === "bıraktı") subBadgeStyle = "color: var(--neon-pink);";
+            let subDateText = sub.status === "plan" ? `Hedef: ${sub.startDate}` : `Başlangıç: ${sub.startDate} | Bitiş: ${sub.endDate}`;
+            subItemsHtml += `<div class="season-row-item"><div class="season-row-header"><span class="season-row-name">${sub.type === 'film' ? 'TEK PARÇA FİLM' : 'SEZON ' + sub.season}</span><div class="mini-stars">${generateStars(sub.rating || 0)}</div><span class="mini-badge" style="${subBadgeStyle}">${subBadgeText} (${sub.current}/${sub.total})</span></div><div class="season-row-dates">${subDateText}</div>${sub.note ? `<div class="season-row-note">${sub.note}</div>` : ''}</div>`;
+        });
+        
+        grid.innerHTML += `<div class="nav-card" id="card-${cardIndex}" style="background-image: url('${items[0].image || 'https://via.placeholder.com/230x350/000'}')" onclick="expandCard(${cardIndex}, event)">
+            <div class="card-main">
+                <div class="${badgeClass}">${badgeText}</div>
+                <div class="progress-wrapper">
+                    <div class="title">${gName}</div>
+                    <div class="progress-text">
+                        <span>${labelText}</span>
+                        <span>%${percentage}</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="${barClass}" style="width: ${percentage}%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-details">
+                <div class="detail-header">İZLEME BİLGİSİ</div>
+                <div class="seasons-scroll-list">${subItemsHtml}</div>
+            </div>
+        </div>`;
+        cardIndex++;
+    }
+}
         function expandCard(index, event) { if (event.target.closest('.card-details')) return; const card = document.getElementById(`card-${index}`); const isExpanded = card.classList.contains('expanded'); document.querySelectorAll('.nav-card').forEach(c => c.classList.remove('expanded')); if (!isExpanded) card.classList.add('expanded'); }
         function filterType(type, button) { activeFilter = type; document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active')); button.classList.add('active'); renderGrid(); }
         function handleSearch() { searchQuery = document.getElementById('search-box').value.trim().toUpperCase(); renderGrid(); }
