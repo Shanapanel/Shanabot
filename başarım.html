@@ -41,10 +41,36 @@
         .header-box { background: rgba(255,255,255,0.02); padding: 25px; border-radius: 12px; border: 1px solid rgba(0, 242, 255, 0.2); margin-bottom: 20px; }
         .profile-title { font-size: 42px; text-shadow: 0 0 15px var(--neon-cyan); letter-spacing: 3px; margin: 0; color: #fff; }
 
-        /* ARAMA KUTUSU */
+        /* ARAMA KUTULARI */
         .search-container { margin-bottom: 20px; position: relative; }
         .search-input { width: 100%; padding: 12px 20px; background: rgba(255, 255, 255, 0.02); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 10px; color: white; font-family: var(--main-font); font-size: 14px; box-sizing: border-box; transition: 0.3s; letter-spacing: 1px; }
         .search-input:focus { border-color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); outline: none; }
+
+        /* KULLANICI ARAMA (YENI) */
+        .user-search-box {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            background: rgba(0, 242, 255, 0.05);
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-family: var(--main-font);
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        .user-search-box::placeholder {
+            color: rgba(0, 242, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .user-search-box:focus {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+            background: rgba(0, 242, 255, 0.08);
+        }
 
         /* BAŞARIM LİSTESİ */
         .badge-list { display: flex; flex-direction: column; gap: 10px; }
@@ -57,10 +83,9 @@
             border: 1px solid rgba(255,255,255,0.03); 
             transition: 0.4s; 
             filter: grayscale(1); 
-            opacity: 0.4; /* Kapalı başarımların okunabilirliğini artırdım */
+            opacity: 0.4;
         }
         
-        /* Kazanılan Başarım Parlaması - Cyan Mode */
         .badge-row.owned { 
             filter: grayscale(0); 
             opacity: 1; 
@@ -79,13 +104,25 @@
         .owned .status-tag { background: var(--neon-cyan); color: #000; box-shadow: 0 0 10px var(--neon-cyan); }
         .owned .badge-name { color: var(--neon-gold); text-shadow: 0 0 5px rgba(255, 215, 0, 0.3); }
 
+        .no-result {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255,255,255,0.3);
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-thumb { background: var(--neon-cyan); }
     </style>
 </head>
 <body>
     <div id="sidebar">
-        <h2 style="color: var(--neon-cyan); text-align: center; letter-spacing: 2px; margin-bottom: 30px;">SİSTEM ÜYELERİ</h2>
+        <h2 style="color: var(--neon-cyan); text-align: center; letter-spacing: 2px; margin-bottom: 20px;">SİSTEM ÜYELERİ</h2>
+        
+        <!-- KULLANICI ARAMA (YENI) -->
+        <input type="text" id="userSearch" class="user-search-box" placeholder="Üye Ara..." oninput="filterUsers()">
+        
         <div id="userList"></div>
     </div>
     
@@ -170,14 +207,30 @@
             if (typeof achievementData === 'undefined') return;
             const list = document.getElementById('userList');
             list.innerHTML = '';
+            
+            const searchTerm = document.getElementById('userSearch')?.value.toLowerCase().trim() || '';
+            let found = false;
+
             achievementData.users.forEach((u, index) => {
-                const div = document.createElement('div');
-                div.className = 'user-btn' + (selectedUserIndex === index ? ' active' : '');
-                div.onclick = () => { selectedUserIndex = index; showUser(index); };
-                div.innerHTML = `<h3>${u.userName}</h3>`;
-                list.appendChild(div);
+                if (u.userName.toLowerCase().includes(searchTerm)) {
+                    found = true;
+                    const div = document.createElement('div');
+                    div.className = 'user-btn' + (selectedUserIndex === index ? ' active' : '');
+                    div.onclick = () => { selectedUserIndex = index; showUser(index); };
+                    div.innerHTML = `<h3>${u.userName}</h3>`;
+                    list.appendChild(div);
+                }
             });
+            
+            if (!found) {
+                list.innerHTML = '<div class="no-result">Üye Bulunamadı</div>';
+            }
+
             document.getElementById('sync-time').innerText = "SYSTEM SYNC: " + achievementData.lastSync;
+        }
+
+        function filterUsers() {
+            loadUsers();
         }
 
         function showUser(index) {
@@ -187,7 +240,6 @@
             document.getElementById('details').style.display = 'block';
             document.getElementById('d-name').innerText = u.userName;
             
-            // Arama kutusunu temizle her profil değişiminde
             document.getElementById('badge-search').value = '';
             
             const bListArea = document.getElementById('badgeList');
@@ -212,7 +264,6 @@
             });
         }
 
-        // Filtreleme Fonksiyonu
         function filterBadges() {
             const query = document.getElementById('badge-search').value.toLowerCase();
             const rows = document.querySelectorAll('.badge-row');
