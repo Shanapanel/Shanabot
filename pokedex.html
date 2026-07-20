@@ -5,10 +5,8 @@
     <title>Shanapanel Pokémon Eğitmen Paneli</title>
     <script id="dataScript" src="data.js"></script>
     <style>
-        /* Hemi Head fontunu GitHub sunucusundan çekilecek şekilde tanımlıyoruz */
         @font-face {
             font-family: 'Hemi Head';
-            /* Buradaki isim, GitHub'a yüklediğin dosya adıyla BİREBİR aynı olmalı */
             src: url('hemi head bd it.ttf') format('truetype');
         }
 
@@ -18,7 +16,6 @@
             --neon-green: #00ff88; 
             --bg-dark: #06090f; 
             --card-bg: #11151c; 
-            /* Font ismini yukarıda tanımladığımız 'Hemi Head' olarak atadık */
             --main-font: 'Hemi Head', sans-serif; 
         }
 
@@ -62,13 +59,70 @@
         .poke-name { display: block; margin-top: 5px; font-size: 11px; color: rgba(255,255,255,0.3); font-weight: bold; }
         .owned .poke-name { color: var(--neon-green); }
 
+        /* ===== ARAMA KUTULARI ===== */
+        .search-box {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            background: rgba(0, 242, 255, 0.05);
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-family: var(--main-font);
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .search-box::placeholder {
+            color: rgba(0, 242, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .search-box:focus {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+            background: rgba(0, 242, 255, 0.08);
+        }
+        
+        .search-icon {
+            position: relative;
+        }
+        
+        .search-icon::before {
+            content: '🔍';
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.5;
+            font-size: 12px;
+            pointer-events: none;
+        }
+
+        .no-result {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255,255,255,0.3);
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-thumb { background: var(--neon-cyan); }
     </style>
 </head>
 <body>
     <div id="sidebar">
-        <h2 style="color: var(--neon-cyan); text-align: center; letter-spacing: 2px; margin-bottom: 30px;">Kullanıcı Listesi</h2>
+        <h2 style="color: var(--neon-cyan); text-align: center; letter-spacing: 2px; margin-bottom: 20px;">Kullanıcı Listesi</h2>
+        
+        <!-- KULLANICI ARAMA -->
+        <div class="search-icon">
+            <input type="text" id="userSearch" class="search-box" placeholder="Eğitmen Ara..." oninput="filterUsers()">
+        </div>
+        
         <div id="userList"></div>
     </div>
     
@@ -88,14 +142,23 @@
                 <div id="teamGrid" class="team-grid"></div>
             </div>
 
-            <h3 style="color: var(--neon-cyan); font-size: 16px; margin-bottom: 15px; opacity: 0.6; letter-spacing: 1px;">TÜM POKÉDEX KOLEKSİYONU</h3>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3 style="color: var(--neon-cyan); font-size: 16px; opacity: 0.6; letter-spacing: 1px; margin: 0;">TÜM POKÉDEX KOLEKSİYONU</h3>
+                <span id="ownedCount" style="color: var(--neon-green); font-size: 14px;"></span>
+            </div>
+            
+            <!-- POKEMON ARAMA -->
+            <div class="search-icon" style="margin-bottom: 15px;">
+                <input type="text" id="pokeSearch" class="search-box" placeholder="Pokemon Ara... (#id veya isim)" oninput="filterPokedex()">
+            </div>
+            
             <div id="pokedexGrid" class="pokedex-grid"></div>
         </div>
     </div>
 
     <script>
         let selectedTrainerIndex = -1;
-        // İNTERNET UYUMLU RESİM YOLU
+        let currentTrainer = null;
         const imgBase = "sugimori/"; 
 
         function refreshData() {
@@ -115,18 +178,36 @@
             if (typeof pokedata === 'undefined') return;
             const list = document.getElementById('userList');
             list.innerHTML = '';
-            pokedata.players.forEach((p, index) => {
+            
+            const searchTerm = document.getElementById('userSearch')?.value.toLowerCase().trim() || '';
+            const filtered = pokedata.players.filter((p, idx) => {
+                p._index = idx;
+                return p.userName.toLowerCase().includes(searchTerm);
+            });
+            
+            if (filtered.length === 0) {
+                list.innerHTML = '<div class="no-result">Eğitmen Bulunamadı</div>';
+                return;
+            }
+
+            filtered.forEach((p) => {
                 const div = document.createElement('div');
-                div.className = 'trainer-btn' + (selectedTrainerIndex === index ? ' active' : '');
-                div.onclick = () => { selectedTrainerIndex = index; showTrainer(index); };
-                div.innerHTML = `<h3>${p.userName}</h3><small>Koleksiyon: ${p.pokedexCount}/386</small>`;
+                div.className = 'trainer-btn' + (selectedTrainerIndex === p._index ? ' active' : '');
+                div.onclick = () => { selectedTrainerIndex = p._index; showTrainer(p._index); };
+                div.innerHTML = `<h3>${p.userName}</h3><small>Koleksiyon: ${p.pokedexCount || 0}/386</small>`;
                 list.appendChild(div);
             });
+        }
+
+        function filterUsers() {
+            loadTrainers();
         }
 
         function showTrainer(index) {
             const p = pokedata.players[index];
             if(!p) return;
+            currentTrainer = p;
+            
             document.getElementById('welcome').style.display = 'none';
             document.getElementById('details').style.display = 'block';
             document.getElementById('d-name').innerText = p.userName;
@@ -153,11 +234,38 @@
                 tGrid.appendChild(sDiv);
             });
 
+            renderPokedex();
+        }
+
+        function renderPokedex() {
+            if (!currentTrainer) return;
+            
+            const p = currentTrainer;
+            const names = pokedata.allNames || {};
+            const searchTerm = document.getElementById('pokeSearch')?.value.toLowerCase().trim() || '';
+            
             const pGrid = document.getElementById('pokedexGrid');
             pGrid.innerHTML = '';
+            
             const owned = p.ownedList || [];
+            let visibleCount = 0;
+            let ownedVisible = 0;
+
             for (let i = 1; i <= 386; i++) {
                 const isOwned = owned.includes(i);
+                const pokeName = (names[i] || '').toLowerCase();
+                
+                // Filtre: ID veya isim ile arama
+                const matchesSearch = !searchTerm || 
+                    i.toString() === searchTerm || 
+                    pokeName.includes(searchTerm) ||
+                    ('#' + i).includes(searchTerm);
+                
+                if (!matchesSearch) continue;
+                
+                visibleCount++;
+                if (isOwned) ownedVisible++;
+
                 const item = document.createElement('div');
                 item.className = `poke-box ${isOwned ? 'owned' : ''}`;
                 item.innerHTML = `
@@ -166,6 +274,17 @@
                     <span class="poke-name">${isOwned ? (names[i] || 'YAKALANDI') : '???'}</span>`;
                 pGrid.appendChild(item);
             }
+            
+            document.getElementById('ownedCount').innerText = 
+                searchTerm ? `${ownedVisible}/${visibleCount} görünen` : `${owned.length}/386`;
+
+            if (visibleCount === 0) {
+                pGrid.innerHTML = '<div class="no-result" style="grid-column: 1 / -1;">Pokemon Bulunamadı</div>';
+            }
+        }
+
+        function filterPokedex() {
+            renderPokedex();
         }
 
         setTimeout(refreshData, 100);
