@@ -6,26 +6,77 @@
     <title>Shanabot | Sıkça Sorulanlar</title>
     <style>
         @font-face { font-family: 'Hemi Head'; src: url('hemi head bd it.ttf') format('truetype'); font-weight: bold; font-style: italic; }
-        :root { --neon-cyan: #00f2ff; --neon-gold: #ffd700; --neon-pink: #e91e63; --neon-green: #00ff88; --neon-purple: #bc13fe; --bg-dark: #05070a; --main-font: 'Hemi Head', sans-serif; }
+        :root { 
+            --neon-cyan: #00f2ff; 
+            --neon-gold: #ffd700; 
+            --neon-pink: #e91e63; 
+            --neon-green: #00ff88; 
+            --neon-purple: #bc13fe; 
+            --bg-dark: #05070a; 
+            --main-font: 'Hemi Head', sans-serif; 
+        }
         body { background-color: var(--bg-dark); color: #fff; font-family: var(--main-font); margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; background-image: radial-gradient(circle at center, #0d121d 0%, #05070a 100%); }
         header { text-align: center; padding: 40px 0; width: 100%; border-bottom: 2px solid var(--neon-cyan); background: rgba(0,0,0,0.5); position: relative; }
         header h1 { font-size: 55px; margin: 0; text-shadow: 0 0 20px var(--neon-cyan); letter-spacing: 3px; font-style: italic; }
         .home-link { position: absolute; top: 20px; right: 20px; text-decoration: none; color: var(--neon-cyan); border: 1px solid var(--neon-cyan); padding: 8px 15px; border-radius: 5px; font-size: 14px; transition: 0.3s; }
         .home-link:hover { background: var(--neon-cyan); color: var(--bg-dark); box-shadow: 0 0 15px var(--neon-cyan); }
+        
+        /* SEKME BUTONLARI */
         .tab-nav { display: flex; gap: 10px; margin: 30px 0; flex-wrap: wrap; justify-content: center; }
         .tab-btn { background: #0d1117; border: 1px solid rgba(255,255,255,0.1); color: #888; padding: 12px 25px; cursor: pointer; font-family: var(--main-font); font-size: 18px; border-radius: 5px; transition: 0.3s; font-style: italic; }
-        .tab-btn.active { color: var(--neon-cyan); border-color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 242, 255, 0.3); background: rgba(0, 242, 255, 0.05); }
+        
+        /* SEKME RENKLERİ - AKTİF */
+        .tab-btn.active[data-color="cyan"] { color: var(--neon-cyan); border-color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 242, 255, 0.3); background: rgba(0, 242, 255, 0.05); }
+        .tab-btn.active[data-color="gold"] { color: var(--neon-gold); border-color: var(--neon-gold); box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); background: rgba(255, 215, 0, 0.05); }
+        .tab-btn.active[data-color="pink"] { color: var(--neon-pink); border-color: var(--neon-pink); box-shadow: 0 0 15px rgba(233, 30, 99, 0.3); background: rgba(233, 30, 99, 0.05); }
+        .tab-btn.active[data-color="green"] { color: var(--neon-green); border-color: var(--neon-green); box-shadow: 0 0 15px rgba(0, 255, 136, 0.3); background: rgba(0, 255, 136, 0.05); }
+        .tab-btn.active[data-color="purple"] { color: var(--neon-purple); border-color: var(--neon-purple); box-shadow: 0 0 15px rgba(188, 19, 254, 0.3); background: rgba(188, 19, 254, 0.05); }
+
         .content-container { width: 90%; max-width: 1100px; padding: 20px; margin-bottom: 50px; }
         .tab-content { display: none; animation: fadeIn 0.4s ease forwards; }
         .tab-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .terminal-box { background: #0d1117; border-left: 5px solid var(--neon-cyan); padding: 25px; margin-bottom: 25px; border-radius: 4px; }
+        
+        /* KUTU RENKLERİ */
+        .terminal-box { background: #0d1117; padding: 25px; margin-bottom: 25px; border-radius: 4px; border-left: 5px solid #555; }
+        .terminal-box.border-cyan { border-left-color: var(--neon-cyan); box-shadow: -5px 0 15px rgba(0, 242, 255, 0.1); }
+        .terminal-box.border-gold { border-left-color: var(--neon-gold); box-shadow: -5px 0 15px rgba(255, 215, 0, 0.1); }
+        .terminal-box.border-pink { border-left-color: var(--neon-pink); box-shadow: -5px 0 15px rgba(233, 30, 99, 0.1); }
+        .terminal-box.border-green { border-left-color: var(--neon-green); box-shadow: -5px 0 15px rgba(0, 255, 136, 0.1); }
+        .terminal-box.border-purple { border-left-color: var(--neon-purple); box-shadow: -5px 0 15px rgba(188, 19, 254, 0.1); }
+        
         .box-title { display: block; font-size: 24px; color: #fff; margin-bottom: 15px; letter-spacing: 1px; font-style: italic; }
         .box-text { font-family: 'Segoe UI', sans-serif; color: #aaa; line-height: 1.8; font-size: 16px; margin: 0; }
         
+        /* KOMUT RENKLENDİRME */
+        .cmd-text { 
+            color: var(--neon-gold); 
+            font-weight: bold; 
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.3); 
+            background: rgba(255, 215, 0, 0.08); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-family: var(--main-font); 
+            letter-spacing: 1px; 
+        }
+        
+        /* JSON'DAKİ RENKLİ SPAN'LAR */
+        .val-text { color: var(--neon-cyan); font-weight: bold; text-shadow: 0 0 8px rgba(0, 242, 255, 0.3); }
+        .sub-text { color: var(--neon-green); font-weight: bold; text-shadow: 0 0 8px rgba(0, 255, 136, 0.3); }
+        .gold-text { color: var(--neon-gold); font-weight: bold; text-shadow: 0 0 8px rgba(255, 215, 0, 0.3); }
+        .purple-text { color: var(--neon-purple); font-weight: bold; text-shadow: 0 0 8px rgba(188, 19, 254, 0.3); }
+        .important { color: var(--neon-pink); font-weight: bold; text-shadow: 0 0 8px rgba(233, 30, 99, 0.3); }
+        
         /* RESİM DÜZENLEMELERİ */
-        .gen-card img { width: 150px; height: auto; border: 1px solid var(--neon-cyan); border-radius: 5px; cursor: pointer; transition: 0.3s; margin-top: 10px; }
-        .gen-card img:hover { transform: scale(1.05); border-color: var(--neon-pink); }
+        .gen-gallery { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 15px; }
+        .gen-card { text-align: center; cursor: pointer; }
+        .gen-card img { width: 150px; height: auto; border: 1px solid var(--neon-cyan); border-radius: 5px; transition: 0.3s; margin-top: 10px; }
+        .gen-card img:hover { transform: scale(1.05); border-color: var(--neon-pink); box-shadow: 0 0 20px rgba(0, 242, 255, 0.3); }
+        .gen-card span { display: block; margin-top: 8px; color: var(--neon-cyan); font-size: 14px; letter-spacing: 2px; }
+        
+        .event-link-btn { color: var(--neon-cyan); text-decoration: none; border: 1px solid var(--neon-cyan); padding: 8px 15px; border-radius: 5px; display: inline-block; margin-top: 10px; transition: 0.3s; }
+        .event-link-btn:hover { background: var(--neon-cyan); color: var(--bg-dark); box-shadow: 0 0 15px var(--neon-cyan); }
+        
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
         .modal img { max-width: 90%; max-height: 90%; border: 2px solid var(--neon-cyan); }
         
@@ -45,7 +96,6 @@
     <div class="content-container" id="tab-content-container"></div>
     <a href="https://shanapanel.github.io/Shanabot/" target="_blank" class="exit-btn">← SİSTEMDEN ÇIKIŞ YAP</a>
     
-    <!-- Modal Penceresi -->
     <div id="imageModal" class="modal" onclick="this.style.display='none'">
         <img id="modalImg">
     </div>
@@ -61,6 +111,21 @@
             } catch(e) { console.error("faq.json yüklenemedi!"); }
         }
 
+        function colorMap(colorClass) {
+            if (colorClass.includes('cyan')) return 'cyan';
+            if (colorClass.includes('gold')) return 'gold';
+            if (colorClass.includes('pink')) return 'pink';
+            if (colorClass.includes('green')) return 'green';
+            if (colorClass.includes('purple')) return 'purple';
+            return 'cyan';
+        }
+
+        function highlightCommands(text) {
+            // ! ile başlayan komutları renklendir
+            // Örnek: !gönder, !öngör, !bas, !slot1, !yakala, !pokeparty, !pokedex1
+            return text.replace(/(!\w+(?:\d+)?)/g, '<span class="cmd-text">$1</span>');
+        }
+
         function renderFaq(data) {
             const navContainer = document.getElementById('tab-nav-container');
             const contentContainer = document.getElementById('tab-content-container');
@@ -69,11 +134,17 @@
             let isFirst = true;
 
             for (let tab in data) {
-                navContainer.innerHTML += `<button class="tab-btn ${isFirst ? 'active' : ''}" onclick="openTab(event, '${tab.replace(/\s+/g, '')}')">${tab}</button>`;
-                let tabHtml = `<div id="${tab.replace(/\s+/g, '')}" class="tab-content ${isFirst ? 'active' : ''}">`;
+                const tabId = tab.replace(/\s+/g, '');
+                const firstItem = data[tab][0];
+                const colorKey = colorMap(firstItem ? firstItem.color : 'border-cyan');
+
+                navContainer.innerHTML += `<button class="tab-btn ${isFirst ? 'active' : ''}" data-color="${colorKey}" onclick="openTab(event, '${tabId}', '${colorKey}')">${tab}</button>`;
+                
+                let tabHtml = `<div id="${tabId}" class="tab-content ${isFirst ? 'active' : ''}">`;
                 
                 data[tab].forEach(item => {
-                    tabHtml += `<div class="terminal-box ${item.color}"><span class="box-title">${item.title}</span><p class="box-text">${item.content}</p></div>`;
+                    const contentWithCommands = highlightCommands(item.content);
+                    tabHtml += `<div class="terminal-box ${item.color}"><span class="box-title">${item.title}</span><p class="box-text">${contentWithCommands}</p></div>`;
                 });
                 
                 tabHtml += `</div>`;
@@ -82,15 +153,23 @@
             }
         }
 
-        function openTab(evt, tabName) {
+        function openTab(evt, tabName, colorKey) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; tabcontent[i].classList.remove("active"); }
+            for (i = 0; i < tabcontent.length; i++) { 
+                tabcontent[i].style.display = "none"; 
+                tabcontent[i].classList.remove("active"); 
+            }
             tablinks = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); }
+            for (i = 0; i < tablinks.length; i++) { 
+                tablinks[i].className = tablinks[i].className.replace(" active", ""); 
+                tablinks[i].removeAttribute('data-color'); 
+            }
+            
             document.getElementById(tabName).style.display = "block";
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.className += " active";
+            evt.currentTarget.setAttribute('data-color', colorKey);
         }
 
         function zoomImg(src) {
