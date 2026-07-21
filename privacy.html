@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shanabot | Gizlilik Politikası</title>
+    <style>
+        @font-face { font-family: 'Hemi Head'; src: url('hemi head bd it.ttf') format('truetype'); font-weight: bold; font-style: italic; }
+        :root { 
+            --neon-cyan: #00f2ff; --neon-pink: #e91e63; --neon-gold: #ffd700; 
+            --neon-purple: #bc13fe; --neon-green: #00ff88; --neon-white: #ffffff; 
+            --bg-dark: #05070a; --main-font: 'Hemi Head', sans-serif; 
+        }
+        body { 
+            background-color: var(--bg-dark); 
+            background-image: radial-gradient(circle at center, #0d121d 0%, #05070a 100%); 
+            color: #ccc; 
+            font-family: var(--main-font); 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh; 
+        }
+        .header-bar {
+            width: 100%;
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .logo {
+            font-size: 32px;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
+            text-decoration: none;
+            font-style: italic;
+            letter-spacing: 2px;
+        }
+        .back-btn {
+            color: #fff;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .back-btn:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+            color: var(--neon-cyan);
+        }
+        .content-container {
+            max-width: 900px;
+            width: 100%;
+            padding: 40px 20px 80px 20px;
+            box-sizing: border-box;
+        }
+        h1 {
+            font-size: 45px;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+            text-transform: uppercase;
+            font-style: italic;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        .last-update {
+            font-size: 12px;
+            color: #666;
+            font-family: 'Segoe UI', sans-serif;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+        .legal-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        h2 {
+            font-size: 20px;
+            color: var(--neon-white);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+        h2:first-of-type {
+            margin-top: 0;
+        }
+        p, li {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #94a3b8;
+            margin-bottom: 15px;
+        }
+        ul {
+            margin-top: 5px;
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        .footer {
+            margin-top: auto;
+            padding: 20px;
+            font-size: 11px;
+            letter-spacing: 4px;
+            color: #222;
+            text-transform: uppercase;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-bar">
+        <a href="index.html" class="logo">SHANABOT</a>
+        <a href="index.html" class="back-btn">← ANA SAYFA</a>
+    </div>
+
+    <div class="content-container">
+        <h1>Gizlilik Politikası</h1>
+        <div class="last-update">Son Güncelleme: 21 Temmuz 2026</div>
+
+        <div class="legal-card">
+            <h2>1. Toplanan Bilgiler</h2>
+            <p>Shanabot olarak gizliliğinize önem veriyoruz. Hizmetlerimizi kullandığınızda şu verileri toplayabiliriz:</p>
+            <ul>
+                <li><strong>Hesap Bilgileri:</strong> Giriş yaptığınız veya platformu bağladığınız sırada sağlanan temel kullanıcı adı, e-posta ve yayıncı profil bilgileri.</li>
+                <li><strong>Ödeme Verileri:</strong> Abonelik ve kredi satın alımlarında kullanılan finansal bilgiler doğrudan ödeme altyapımız olan Paddle tarafından işlenir ve saklanır; kredi kartı bilgileriniz sunucularımızda tutulmaz.</li>
+                <li><strong>Kullanım ve Log Verileri:</strong> Bot yapılandırmaları, komut logları ve sistem performans verileri.</li>
+            </ul>
+
+            <h2>2. Bilgilerin Kullanım Amacı</h2>
+            <p>Toplanan veriler şu amaçlarla kullanılır:</p>
+            <ul>
+                <li>Shanabot ve ShanaHype hizmetlerinin kesintisiz sunulması ve iyileştirilmesi,</li>
+                <li>Abonelik ve lisans yönetiminin sağlanması,</li>
+                <li>Destek taleplerine yanıt verilmesi ve güncellemelerin bildirilmesi.</li>
+            </ul>
+
+            <h2>3. Veri Güvenliği</h2>
+            <p>Verilerinizin güvenliğini sağlamak için endüstri standardı güvenlik önlemleri alınmaktadır. Üçüncü taraflarla kişisel verileriniz yasal zorunluluklar haricinde kesinlikle paylaşılmaz.</p>
+        </div>
+    </div>
+
+    <div class="footer">SHANAPANEL DATA CORE // SECURE CONNECTION ESTABLISHED</div>
+</body>
+</html>
