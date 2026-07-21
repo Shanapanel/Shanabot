@@ -21,6 +21,13 @@
         "desc": "Etkinlik şampiyonları, TOP 25 listesi ve Onur Kürsüsü."
     },
     {
+        "icon": "🔥",
+        "title": "SHANAHYPE",
+        "color": "pokedex",
+        "link": "https://shanapanel.github.io/Shanabot/ShanaHype",
+        "desc": "Yayına kredi satın alıp etkileşimde bulunabileceğiniz alan"
+    },
+    {
         "icon": "🎯",
         "title": "ETKİNLİKLER",
         "color": "event",
