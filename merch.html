@@ -25,11 +25,10 @@
         .search-input:focus + .search-icon { color: var(--neon-pink); }
         .menu-grid { display: flex; gap: 25px; justify-content: flex-start; flex-wrap: wrap; width: 100%; }
 
-        /* KART - dinamik yükseklik */
+        /* KART */
         .merch-card { 
             width: 280px; 
-            min-height: 400px;
-            height: auto;
+            height: 400px;
             border: 2px solid rgba(0, 242, 255, 0.3); 
             border-radius: 20px; 
             display: flex; 
@@ -48,8 +47,7 @@
         .merch-card:hover:not(.expanded) { transform: translateY(-5px); border-color: var(--neon-cyan); box-shadow: 0 0 25px rgba(0, 242, 255, 0.2); }
         .merch-card.expanded { 
             width: 850px; 
-            min-height: 400px;
-            height: auto;
+            height: 400px;
             border-color: var(--neon-pink); 
             box-shadow: 0 0 35px rgba(233, 30, 99, 0.3); 
             cursor: default; 
@@ -57,8 +55,7 @@
 
         .card-main { 
             width: 280px; 
-            min-height: 400px;
-            height: auto;
+            height: 400px;
             display: flex; 
             flex-direction: column; 
             position: relative; 
@@ -71,12 +68,12 @@
         .out-stock { color: var(--neon-pink); border-color: var(--neon-pink); }
         .price-tag { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.7); color: var(--neon-gold); font-size: 20px; font-weight: bold; padding: 6px 14px; border-radius: 8px; border: 1px solid var(--neon-gold); text-shadow: 0 0 10px rgba(255,215,0,0.3); }
 
-        /* SATIN AL BUTONU */
+        /* SATIN AL BUTONU - ortada sabit */
         .buy-btn-main {
             position: absolute;
-            bottom: 100px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
             background: linear-gradient(135deg, var(--neon-pink), #ff0055);
             color: white;
             font-family: var(--main-font);
@@ -84,22 +81,22 @@
             font-style: italic;
             font-weight: bold;
             border: none;
-            padding: 12px 30px;
-            border-radius: 10px;
+            padding: 14px 32px;
+            border-radius: 12px;
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 2px;
-            box-shadow: 0 0 20px rgba(233, 30, 99, 0.4);
+            box-shadow: 0 0 25px rgba(233, 30, 99, 0.5);
             transition: all 0.3s;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             z-index: 10;
         }
         .buy-btn-main:hover {
-            box-shadow: 0 0 35px rgba(233, 30, 99, 0.7);
-            transform: translateX(-50%) translateY(-2px);
+            box-shadow: 0 0 40px rgba(233, 30, 99, 0.8);
+            transform: translate(-50%, -50%) scale(1.05);
         }
 
         .progress-wrapper { 
@@ -116,12 +113,11 @@
         .title { font-size: 22px; letter-spacing: 1px; margin: 0 0 8px 0; font-style: italic; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.9); }
         .category-text { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: #aaa; font-weight: bold; display: flex; justify-content: space-between; margin-bottom: 6px; text-shadow: 1px 1px 2px #000; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* AÇILIR DETAY - dinamik yükseklik */
+        /* AÇILIR DETAY */
         .card-details { 
             opacity: 0; 
             visibility: hidden; 
-            min-height: 400px;
-            height: auto;
+            height: 400px;
             display: flex; 
             flex-direction: column; 
             justify-content: flex-start; 
@@ -141,7 +137,6 @@
 
         .detail-header { font-family: var(--main-font); font-size: 22px; color: var(--neon-pink); font-style: italic; border-bottom: 2px solid rgba(233, 30, 99, 0.2); padding-bottom: 5px; margin-bottom: 15px; text-transform: uppercase; }
 
-        /* GALERİ - resimler tıklanabilir */
         .gallery-container { display: flex; gap: 12px; margin-bottom: 15px; }
         .main-image { 
             width: 280px; 
@@ -168,7 +163,10 @@
 
         .product-info { 
             flex: 1; 
+            overflow-y: auto;
         }
+        .product-info::-webkit-scrollbar { width: 3px; }
+        .product-info::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
         .info-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 13px; }
         .info-label { color: #888; text-transform: uppercase; font-size: 10px; letter-spacing: 1px; }
         .info-value { color: #fff; font-weight: bold; }
@@ -217,7 +215,7 @@
     <div class="hub-container">
         <div class="top-nav">
             <a href="https://shanapanel.github.io/Shanabot/">← HUB GERI DON</a>
-            
+            <a href="merch-admin.html" style="color: var(--neon-pink);">ADMIN PANEL →</a>
         </div>
         <h1>MERCH STORE</h1>
         <div class="controls-wrapper">
@@ -233,7 +231,6 @@
     </div>
     <div class="footer">SHANAPANEL MERCH_CORE // SECURE CHECKOUT</div>
 
-    <!-- LIGHTBOX -->
     <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
         <div class="lightbox-close">×</div>
         <img src="" class="lightbox-img" id="lightbox-img" alt="">
@@ -356,7 +353,6 @@
             renderGrid();
         }
 
-        // ESC ile lightbox kapat
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeLightbox();
         });
