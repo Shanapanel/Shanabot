@@ -21,6 +21,13 @@
         "desc": "Etkinlik şampiyonları, TOP 25 listesi ve Onur Kürsüsü."
     },
     {
+        "icon": "🔥",
+        "title": "MERCH",
+        "color": "pokedex",
+        "link": "https://shanapanel.github.io/Shanabot/merch",
+        "desc": "merch ürünleri şu anda test aşamasında"
+    },
+    {
         "icon": "🎯",
         "title": "ETKİNLİKLER",
         "color": "event",

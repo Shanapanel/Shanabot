@@ -1,0 +1,16 @@
+[
+    {
+        "name": "TEST",
+        "images": [
+            "merch/zenci-göt.gif"
+        ],
+        "image": "merch/zenci-göt.gif",
+        "price": 0,
+        "stock": 0,
+        "category": "",
+        "size": "",
+        "material": "",
+        "description": "test",
+        "iyzicoLink": "https://iyzi.link/AJ8CbQ"
+    }
+]
