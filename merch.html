@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shanabot | Merch Store</title>
+    <title>Shanabot | Merch</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @font-face { font-family: 'Hemi Head'; src: url('hemi head bd it.ttf') format('truetype'); font-weight: bold; font-style: italic; }
@@ -68,7 +68,7 @@
         .out-stock { color: var(--neon-pink); border-color: var(--neon-pink); }
         .price-tag { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.7); color: var(--neon-gold); font-size: 20px; font-weight: bold; padding: 6px 14px; border-radius: 8px; border: 1px solid var(--neon-gold); text-shadow: 0 0 10px rgba(255,215,0,0.3); }
 
-        /* SATIN AL BUTONU - alt kısımdaki boş siyah alanda */
+        /* SATIN AL BUTONU */
         .buy-btn-main {
             display: inline-flex;
             align-items: center;
@@ -134,31 +134,53 @@
         }
         .merch-card.expanded .card-details { opacity: 1; visibility: visible; }
 
-        .detail-header { font-family: var(--main-font); font-size: 22px; color: var(--neon-pink); font-style: italic; border-bottom: 2px solid rgba(233, 30, 99, 0.2); padding-bottom: 5px; margin-bottom: 15px; text-transform: uppercase; }
+        .detail-header { font-family: var(--main-font); font-size: 22px; color: var(--neon-pink); font-style: italic; border-bottom: 2px solid rgba(233, 30, 99, 0.2); padding-bottom: 5px; margin-bottom: 12px; text-transform: uppercase; }
 
-        .gallery-container { display: flex; gap: 12px; margin-bottom: 15px; }
-        .main-image { 
-            width: 280px; 
-            height: 280px; 
-            border-radius: 12px; 
-            border: 2px solid rgba(0, 242, 255, 0.3); 
-            object-fit: cover; 
-            transition: all 0.3s; 
+        /* RESIM GRID - kare, küçük */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 8px;
+            margin-bottom: 12px;
+            max-height: 180px;
+            overflow-y: auto;
+        }
+        .gallery-grid::-webkit-scrollbar { width: 3px; }
+        .gallery-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        .gallery-img {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 8px;
+            border: 2px solid rgba(0, 242, 255, 0.2);
+            object-fit: cover;
             cursor: zoom-in;
+            transition: all 0.3s;
         }
-        .main-image:hover { border-color: var(--neon-cyan); box-shadow: 0 0 20px rgba(0, 242, 255, 0.2); }
-        .thumb-list { display: flex; flex-direction: column; gap: 8px; width: 70px; }
-        .thumb { 
-            width: 66px; 
-            height: 66px; 
-            border-radius: 8px; 
-            border: 2px solid rgba(255,255,255,0.1); 
-            object-fit: cover; 
-            cursor: pointer; 
-            transition: all 0.3s; 
-            opacity: 0.6; 
+        .gallery-img:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
+            transform: scale(1.05);
         }
-        .thumb:hover, .thumb.active { border-color: var(--neon-cyan); opacity: 1; box-shadow: 0 0 10px rgba(0, 242, 255, 0.3); }
+        .gallery-img.active {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
+        }
+
+        /* BÜYÜK ÖNİZLEME */
+        .preview-area {
+            width: 100%;
+            height: 160px;
+            border-radius: 12px;
+            border: 2px solid rgba(0, 242, 255, 0.3);
+            object-fit: cover;
+            margin-bottom: 12px;
+            cursor: zoom-in;
+            transition: all 0.3s;
+        }
+        .preview-area:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+        }
 
         .product-info { 
             flex: 1; 
@@ -166,10 +188,10 @@
         }
         .product-info::-webkit-scrollbar { width: 3px; }
         .product-info::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-        .info-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 13px; }
-        .info-label { color: #888; text-transform: uppercase; font-size: 10px; letter-spacing: 1px; }
+        .info-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 12px; }
+        .info-label { color: #888; text-transform: uppercase; font-size: 9px; letter-spacing: 1px; }
         .info-value { color: #fff; font-weight: bold; }
-        .desc-text { font-size: 12px; color: #ccc; line-height: 1.6; margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.02); border-radius: 8px; }
+        .desc-text { font-size: 11px; color: #ccc; line-height: 1.5; margin: 8px 0; padding: 8px; background: rgba(255,255,255,0.02); border-radius: 8px; }
 
         /* LIGHTBOX */
         .lightbox-overlay {
@@ -216,7 +238,7 @@
             <a href="https://shanapanel.github.io/Shanabot/">← HUB GERI DON</a>
             
         </div>
-        <h1>MERCH STORE</h1>
+        <h1>SHANA MERCH</h1>
         <div class="controls-wrapper">
             <div class="filter-container" id="filter-container">
                 <button class="filter-btn active" onclick="filterType('hepsi', this)">HEPSI</button>
@@ -276,12 +298,10 @@
                 const images = item.images || [item.image];
                 const mainImg = images[0];
 
-                let thumbsHtml = '';
-                if (images.length > 1) {
-                    thumbsHtml = images.map((img, i) => 
-                        `<img src="${img}" class="thumb ${i === 0 ? 'active' : ''}" onclick="changeImage(${index}, '${img}', this, event)" alt="">`
-                    ).join('');
-                }
+                // Grid resimler
+                let gridImgs = images.map((img, i) => 
+                    `<img src="${img}" class="gallery-img ${i === 0 ? 'active' : ''}" onclick="selectPreview(${index}, '${img}', this)" alt="">`
+                ).join('');
 
                 grid.innerHTML += `
                     <div class="merch-card" id="card-${index}" style="background-image: url('${mainImg}')" onclick="expandCard(${index}, event)">
@@ -296,10 +316,8 @@
                         </div>
                         <div class="card-details" onclick="event.stopPropagation()">
                             <div class="detail-header">URUN DETAYI</div>
-                            <div class="gallery-container">
-                                <img src="${mainImg}" class="main-image" id="main-img-${index}" onclick="openLightbox('${mainImg}')" alt="">
-                                ${images.length > 1 ? `<div class="thumb-list">${thumbsHtml}</div>` : ''}
-                            </div>
+                            <img src="${mainImg}" class="preview-area" id="preview-${index}" onclick="openLightbox('${mainImg}')" alt="">
+                            <div class="gallery-grid" id="grid-${index}">${gridImgs}</div>
                             <div class="product-info">
                                 <div class="info-row"><span class="info-label">Stok</span><span class="info-value" style="color: ${item.stock > 10 ? 'var(--neon-green)' : item.stock > 0 ? 'var(--neon-gold)' : 'var(--neon-pink)'}">${item.stock} ADET</span></div>
                                 <div class="info-row"><span class="info-label">Kategori</span><span class="info-value">${item.category.toUpperCase()}</span></div>
@@ -321,14 +339,14 @@
             if (!isExpanded) card.classList.add('expanded');
         }
 
-        function changeImage(index, src, thumbEl, event) {
-            event.stopPropagation();
-            const mainImg = document.getElementById(`main-img-${index}`);
-            mainImg.src = src;
-            mainImg.onclick = function() { openLightbox(src); };
-            const thumbs = thumbEl.parentElement.querySelectorAll('.thumb');
-            thumbs.forEach(t => t.classList.remove('active'));
-            thumbEl.classList.add('active');
+        function selectPreview(index, src, imgEl) {
+            const preview = document.getElementById(`preview-${index}`);
+            preview.src = src;
+            preview.onclick = function() { openLightbox(src); };
+
+            const grid = document.getElementById(`grid-${index}`);
+            grid.querySelectorAll('.gallery-img').forEach(img => img.classList.remove('active'));
+            imgEl.classList.add('active');
         }
 
         function openLightbox(src) {
