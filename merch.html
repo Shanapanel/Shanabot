@@ -9,7 +9,7 @@
         @font-face { font-family: 'Hemi Head'; src: url('hemi head bd it.ttf') format('truetype'); font-weight: bold; font-style: italic; }
         :root { --neon-cyan: #00f2ff; --neon-pink: #e91e63; --neon-gold: #ffd700; --neon-purple: #bc13fe; --neon-green: #00ff88; --bg-dark: #05070a; --main-font: 'Hemi Head', sans-serif; }
         body { background-color: var(--bg-dark); background-image: radial-gradient(circle at center, #0d121d 0%, #05070a 100%); color: #fff; font-family: var(--main-font); margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; min-height: 100vh; overflow-x: hidden; padding: 40px 20px; box-sizing: border-box; }
-        .hub-container { width: 100%; max-width: 1200px; z-index: 2; display: flex; flex-direction: column; align-items: center; }
+        .hub-container { width: 100%; max-width: 1400px; z-index: 2; display: flex; flex-direction: column; align-items: center; }
         .top-nav { display: flex; justify-content: space-between; align-items: center; width: 100%; border-bottom: 2px solid rgba(0, 242, 255, 0.2); padding-bottom: 20px; margin-bottom: 30px; }
         .top-nav a { color: #666; text-decoration: none; font-size: 20px; letter-spacing: 2px; transition: all 0.3s; }
         .top-nav a:hover { color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0, 242, 255, 0.5); }
@@ -25,30 +25,64 @@
         .search-input:focus + .search-icon { color: var(--neon-pink); }
         .menu-grid { display: flex; gap: 25px; justify-content: flex-start; flex-wrap: wrap; width: 100%; }
 
-        .merch-card { width: 230px; height: 350px; border: 2px solid rgba(0, 242, 255, 0.3); border-radius: 20px; display: flex; align-items: flex-start; justify-content: flex-start; padding: 0; position: relative; overflow: hidden; box-sizing: border-box; cursor: pointer; background-size: 230px 350px; background-repeat: no-repeat; background-position: left center; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s, border-color 0.3s; }
+        /* KART - 280px genişlik */
+        .merch-card { width: 280px; height: 400px; border: 2px solid rgba(0, 242, 255, 0.3); border-radius: 20px; display: flex; align-items: flex-start; justify-content: flex-start; padding: 0; position: relative; overflow: hidden; box-sizing: border-box; cursor: pointer; background-size: 280px 400px; background-repeat: no-repeat; background-position: left center; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s, border-color 0.3s; }
         .merch-card:hover:not(.expanded) { transform: translateY(-5px); border-color: var(--neon-cyan); box-shadow: 0 0 25px rgba(0, 242, 255, 0.2); }
-        .merch-card.expanded { width: 650px; border-color: var(--neon-pink); box-shadow: 0 0 35px rgba(233, 30, 99, 0.3); cursor: default; }
+        .merch-card.expanded { width: 850px; border-color: var(--neon-pink); box-shadow: 0 0 35px rgba(233, 30, 99, 0.3); cursor: default; }
 
-        .card-main { width: 230px; height: 100%; display: flex; flex-direction: column; position: relative; z-index: 2; flex-shrink: 0; }
+        .card-main { width: 280px; height: 100%; display: flex; flex-direction: column; position: relative; z-index: 2; flex-shrink: 0; }
         .stock-badge { margin-top: 15px; margin-left: 15px; align-self: flex-start; font-size: 9px; padding: 3px 8px; border-radius: 8px; letter-spacing: 1px; font-weight: bold; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); }
         .in-stock { color: var(--neon-green); border-color: var(--neon-green); }
         .low-stock { color: var(--neon-gold); border-color: var(--neon-gold); }
         .out-stock { color: var(--neon-pink); border-color: var(--neon-pink); }
-        .price-tag { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.7); color: var(--neon-gold); font-size: 18px; font-weight: bold; padding: 5px 12px; border-radius: 8px; border: 1px solid var(--neon-gold); text-shadow: 0 0 10px rgba(255,215,0,0.3); }
+        .price-tag { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.7); color: var(--neon-gold); font-size: 20px; font-weight: bold; padding: 6px 14px; border-radius: 8px; border: 1px solid var(--neon-gold); text-shadow: 0 0 10px rgba(255,215,0,0.3); }
+
+        /* SATIN AL BUTONU - ana yüzeyde */
+        .buy-btn-main {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--neon-pink), #ff0055);
+            color: white;
+            font-family: var(--main-font);
+            font-size: 16px;
+            font-style: italic;
+            font-weight: bold;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 20px rgba(233, 30, 99, 0.4);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 10;
+        }
+        .buy-btn-main:hover {
+            box-shadow: 0 0 35px rgba(233, 30, 99, 0.7);
+            transform: translateX(-50%) translateY(-2px);
+        }
+
         .progress-wrapper { width: calc(100% + 4px); margin-left: -2px; margin-right: -2px; margin-bottom: -2px; margin-top: auto; background: linear-gradient(to top, rgba(5, 7, 10, 1) 0%, rgba(5, 7, 10, 0.95) 40%, rgba(5, 7, 10, 0.7) 70%, rgba(5, 7, 10, 0) 100%); padding: 55px 17px 17px 17px; box-sizing: border-box; border-radius: 0 0 18px 18px; }
         .title { font-size: 22px; letter-spacing: 1px; margin: 0 0 8px 0; font-style: italic; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.9); }
         .category-text { font-family: 'Segoe UI', sans-serif; font-size: 11px; color: #aaa; font-weight: bold; display: flex; justify-content: space-between; margin-bottom: 6px; text-shadow: 1px 1px 2px #000; text-transform: uppercase; letter-spacing: 1px; }
 
-        .card-details { opacity: 0; visibility: hidden; height: 100%; display: flex; flex-direction: column; justify-content: flex-start; font-family: 'Segoe UI', sans-serif; transition: opacity 0.3s ease, visibility 0.3s ease; transition-delay: 0.2s; width: 420px; position: relative; z-index: 2; background: #0b0f19; border-left: 1px solid rgba(255, 255, 255, 0.05); padding: 15px; box-sizing: border-box; border-radius: 0 18px 18px 0; }
+        /* AÇILIR DETAY - 570px genişlik */
+        .card-details { opacity: 0; visibility: hidden; height: 100%; display: flex; flex-direction: column; justify-content: flex-start; font-family: 'Segoe UI', sans-serif; transition: opacity 0.3s ease, visibility 0.3s ease; transition-delay: 0.2s; width: 570px; position: relative; z-index: 2; background: #0b0f19; border-left: 1px solid rgba(255, 255, 255, 0.05); padding: 20px; box-sizing: border-box; border-radius: 0 18px 18px 0; }
         .merch-card.expanded .card-details { opacity: 1; visibility: visible; }
 
         .detail-header { font-family: var(--main-font); font-size: 22px; color: var(--neon-pink); font-style: italic; border-bottom: 2px solid rgba(233, 30, 99, 0.2); padding-bottom: 5px; margin-bottom: 15px; text-transform: uppercase; }
 
-        .gallery-container { display: flex; gap: 10px; margin-bottom: 15px; }
-        .main-image { width: 200px; height: 200px; border-radius: 12px; border: 2px solid rgba(0, 242, 255, 0.3); object-fit: cover; transition: all 0.3s; }
+        .gallery-container { display: flex; gap: 12px; margin-bottom: 15px; }
+        .main-image { width: 280px; height: 280px; border-radius: 12px; border: 2px solid rgba(0, 242, 255, 0.3); object-fit: cover; transition: all 0.3s; }
         .main-image:hover { border-color: var(--neon-cyan); box-shadow: 0 0 20px rgba(0, 242, 255, 0.2); }
-        .thumb-list { display: flex; flex-direction: column; gap: 8px; width: 60px; }
-        .thumb { width: 56px; height: 56px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.1); object-fit: cover; cursor: pointer; transition: all 0.3s; opacity: 0.6; }
+        .thumb-list { display: flex; flex-direction: column; gap: 8px; width: 70px; }
+        .thumb { width: 66px; height: 66px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.1); object-fit: cover; cursor: pointer; transition: all 0.3s; opacity: 0.6; }
         .thumb:hover, .thumb.active { border-color: var(--neon-cyan); opacity: 1; box-shadow: 0 0 10px rgba(0, 242, 255, 0.3); }
 
         .product-info { flex: 1; overflow-y: auto; }
@@ -57,12 +91,7 @@
         .info-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 13px; }
         .info-label { color: #888; text-transform: uppercase; font-size: 10px; letter-spacing: 1px; }
         .info-value { color: #fff; font-weight: bold; }
-        .price-big { font-size: 28px; color: var(--neon-gold); font-family: var(--main-font); font-style: italic; text-shadow: 0 0 15px rgba(255,215,0,0.3); }
         .desc-text { font-size: 12px; color: #ccc; line-height: 1.6; margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.02); border-radius: 8px; }
-
-        .buy-btn { width: 100%; background: linear-gradient(135deg, var(--neon-pink), #ff0055); color: white; font-family: var(--main-font); font-size: 18px; font-style: italic; font-weight: bold; border: none; padding: 14px; border-radius: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 20px rgba(233, 30, 99, 0.3); transition: all 0.3s; margin-top: 10px; text-decoration: none; display: block; text-align: center; }
-        .buy-btn:hover { box-shadow: 0 0 35px rgba(233, 30, 99, 0.6); transform: translateY(-2px); }
-        .buy-btn i { margin-right: 8px; }
 
         .bg-glow { position: fixed; width: 100%; height: 100%; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 255, 0, 0.06)); background-size: 100% 2px, 3px 100%; pointer-events: none; z-index: 1; top: 0; left: 0; }
         .footer { margin-top: 40px; padding: 20px 0; font-size: 11px; letter-spacing: 4px; color: #222; text-transform: uppercase; font-style: italic; z-index: 2; }
@@ -143,6 +172,7 @@
                         <div class="card-main">
                             <div class="stock-badge ${stockClass}">${stockText}</div>
                             <div class="price-tag">₺${item.price}</div>
+                            <a href="${item.iyzicoLink}" target="_blank" class="buy-btn-main" onclick="event.stopPropagation()"><i class="fa-solid fa-cart-shopping"></i> SATIN AL</a>
                             <div class="progress-wrapper">
                                 <div class="title">${item.name}</div>
                                 <div class="category-text"><span>${item.category.toUpperCase()}</span><span>${item.stock} ADET</span></div>
@@ -155,13 +185,11 @@
                                 ${images.length > 1 ? `<div class="thumb-list">${thumbsHtml}</div>` : ''}
                             </div>
                             <div class="product-info">
-                                <div class="info-row"><span class="info-label">Fiyat</span><span class="price-big">₺${item.price}</span></div>
                                 <div class="info-row"><span class="info-label">Stok</span><span class="info-value" style="color: ${item.stock > 10 ? 'var(--neon-green)' : item.stock > 0 ? 'var(--neon-gold)' : 'var(--neon-pink)'}">${item.stock} ADET</span></div>
                                 <div class="info-row"><span class="info-label">Kategori</span><span class="info-value">${item.category.toUpperCase()}</span></div>
                                 ${item.size ? `<div class="info-row"><span class="info-label">Beden</span><span class="info-value">${item.size}</span></div>` : ''}
                                 ${item.material ? `<div class="info-row"><span class="info-label">Malzeme</span><span class="info-value">${item.material}</span></div>` : ''}
                                 <div class="desc-text">${item.description}</div>
-                                <a href="${item.iyzicoLink}" target="_blank" class="buy-btn"><i class="fa-solid fa-cart-shopping"></i> SATIN AL</a>
                             </div>
                         </div>
                     </div>
@@ -170,7 +198,7 @@
         }
 
         function expandCard(index, event) {
-            if (event.target.closest('.card-details')) return;
+            if (event.target.closest('.card-details') || event.target.closest('.buy-btn-main')) return;
             const card = document.getElementById(`card-${index}`);
             const isExpanded = card.classList.contains('expanded');
             document.querySelectorAll('.merch-card').forEach(c => c.classList.remove('expanded'));
