@@ -3,27 +3,27 @@
         {
             "title": "💬 MESAJ BAŞINA PUAN",
             "color": "border-cyan",
-            "content": "Sohbet periyodu 30 saniye olarak ayarlanmıştır. Dakikada maksimum 2 mesajdan kazanç sağlayabilirsiniz. <br>Normal Kazanç: <span class=\"val-text\">25 Coin</span> | Abone: <span class=\"sub-text\">150 Coin</span>."
+            "content": "Sohbet periyodu 30 saniye olarak ayarlanmıştır. Dakikada maksimum 2 mesajdan kazanç sağlayabilirsiniz. <br>Normal Kazanç: <span class=\"val-text\">1 Coin</span> | Abone: <span class=\"sub-text\">6 Coin</span>."
         },
         {
             "title": "✨ ABONELİK ÖDÜLÜ (SUB BONUS)",
             "color": "border-gold",
-            "content": "<span class=\"gold-text\">KENDİNE ABONELİK:</span> Abone olduğunuzda veya yenilediğinizde anında <span class=\"sub-text\">15.000 COIN</span> kazanırsınız. <br><span class=\"gold-text\">HEDİYE GÖNDERİMİ:</span> Başka bir kullanıcıya abonelik hediye ettiğinizde, her bir abonelik için <span class=\"sub-text\">15.000 COIN</span> doğrudan SİZİN hesabınıza tanımlanır."
+            "content": "<span class=\"gold-text\">KENDİNE ABONELİK:</span> Abone olduğunuzda veya yenilediğinizde anında <span class=\"sub-text\">300COIN</span> kazanırsınız. <br><span class=\"gold-text\">HEDİYE GÖNDERİMİ:</span> Başka bir kullanıcıya abonelik hediye ettiğinizde, her bir abonelik için <span class=\"sub-text\">450 COIN</span> doğrudan SİZİN hesabınıza tanımlanır."
         },
         {
             "title": "🏦 GİŞE MAAŞI",
             "color": "border-pink",
-            "content": "Botun çağrısından sonra ödemeyi onaylamak için tam <span class=\"val-text\">30 SANİYE</span> süreniz bulunmaktadır. <br>\n                    Normal Ödeme: <span class=\"val-text\">500 Birim</span> | Abone: <span class=\"sub-text\">3.000 Birim</span>."
+            "content": "Botun çağrısından sonra ödemeyi onaylamak için tam <span class=\"val-text\">60 SANİYE</span> süreniz bulunmaktadır. <br>\n                    Normal Ödeme: <span class=\"val-text\">10 Birim</span> | Abone: <span class=\"sub-text\">60 Birim</span>."
         },
         {
             "title": "💸 PUAN TRANSFERİ",
             "color": "border-green",
-            "content": "Coinlerinizi diğer kullanıcılara hediye edebilir veya ticaret yapabilirsiniz. (%5 vergi kesilir.) <br>\n                    <span class=\"gold-text\">KOMUT:</span> !gönder [kullanıcı_adı] [miktar] <br>\n                    <span class=\"val-text\">Örnek:</span> !gönder shana 1000"
+            "content": "Coinlerinizi diğer kullanıcılara hediye edebilir veya ticaret yapabilirsiniz. (%18 vergi kesilir.) <br>\n                    <span class=\"gold-text\">KOMUT:</span> !gönder [kullanıcı_adı] [miktar] <br>\n                    <span class=\"val-text\">Örnek:</span> !gönder shana 1000"
         },
         {
             "title": "🔮 ÖNGÖRÜ SİSTEMİ",
             "color": "border-purple",
-            "content": "Yayın olaylarına bahis yaparak yatırdığınız puanın <span class=\"val-text\"> TOPLAM PUAN/ YATIRDIĞINIZ PUAN oranında katını</span> kazanın. <br>\n                    Seçenek sınırı yoktur. <br><br>\n                    <span class=\"purple-text\">KOMUTLAR:</span><br>\n                    <span class=\"val-text\">!öngör [seçenek] [puan]</span><br>\n                    <span class=\"gold-text\">!bas [seçenek] [puan]</span>"
+            "content": "Yayın olaylarına bahis yaparak yatırdığınızın tam <span class=\"val-text\">4 KATINI (4x)</span> kazanın. <br>\n                    Seçenek sınırı yoktur. <br><br>\n                    <span class=\"purple-text\">KOMUTLAR:</span><br>\n                    <span class=\"val-text\">!öngör [seçenek] [puan]</span><br>\n                    <span class=\"gold-text\">!bas [seçenek] [puan]</span>"
         },
         {
             "title": "💜 PUAN ETKİNLİKLERİ",

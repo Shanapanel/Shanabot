@@ -1,55 +1,63 @@
 [
     {
         "ad": "Pokemon Kutusu",
-        "fiyat": "250.000",
+        "fiyat": "5000",
         "group": "POKEMON OYUN",
         "cmd": "!pokemonkutusu",
         "gif": "market/kutu.gif",
         "desc": "Rastgele bir pokemon yakala."
     },
     {
-        "ad": "Youtube Shorts",
-        "fiyat": "25.000",
-        "group": "SOSYAL MEDYA",
-        "cmd": "!shorts",
-        "gif": "market/shorts.gif",
-        "desc": "Maksimum 60 saniyelik Shorts."
-    },
-    {
-        "ad": "Youtube Video",
-        "fiyat": "75.000",
-        "group": "SOSYAL MEDYA",
-        "cmd": "!video",
-        "gif": "market/video.gif",
-        "desc": "Atmak istediğiniz videoyu komuttan sonra yazın. (Maksimum Süre 3 dakika 30 saniye)"
-    },
-    {
         "ad": "Asma",
-        "fiyat": "150.000",
+        "fiyat": "2500",
         "group": "CHAT INTERAKSIYONU",
         "cmd": "!asma",
         "gif": "market/asma.gif",
         "desc": "Chattten birini 5dk boyunca timeoutlar. Şeyh Sait gibi ekranda asılır."
     },
     {
-        "ad": "Sula",
-        "fiyat": "7.500",
-        "group": "YAYINCI ETKILEŞIM",
-        "cmd": "!sula",
-        "gif": "market/sula.gif",
-        "desc": "Yayıncıya Su içir."
+        "ad": "Youtube Video",
+        "fiyat": "1500",
+        "group": "SOSYAL MEDYA",
+        "cmd": "!video",
+        "gif": "market/video.gif",
+        "desc": "Atmak istediğiniz videoyu komuttan sonra yazın. (Maksimum Süre 3 dakika 30 saniye)"
+    },
+    {
+        "ad": "Youtube Şarkı İstek",
+        "fiyat": "1000",
+        "group": "ŞARKI İSTEK",
+        "cmd": "!istekşarkı",
+        "gif": "",
+        "desc": "Yayındaki çalan playliste şarkınız eklenir."
     },
     {
         "ad": "Tiktok",
-        "fiyat": "35000",
+        "fiyat": "800",
         "group": "SOSYAL MEDYA",
         "cmd": "!tiktok",
         "gif": "market/tiktok.gif",
         "desc": "Tiktok videosu ekranda oynar."
     },
     {
-        "ad": "Fal",
+        "ad": "Youtube Shorts",
         "fiyat": "500",
+        "group": "SOSYAL MEDYA",
+        "cmd": "!shorts",
+        "gif": "market/shorts.gif",
+        "desc": "Maksimum 60 saniyelik Shorts."
+    },
+    {
+        "ad": "Sula",
+        "fiyat": "200",
+        "group": "YAYINCI ETKILEŞIM",
+        "cmd": "!sula",
+        "gif": "market/sula.gif",
+        "desc": "Yayıncıya Su içir."
+    },
+    {
+        "ad": "Fal",
+        "fiyat": "5",
         "group": "CHAT INTERAKSIYONU",
         "cmd": "!fal",
         "gif": "market/fal.gif",
