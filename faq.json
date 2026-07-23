@@ -23,7 +23,7 @@
         {
             "title": "🔮 ÖNGÖRÜ SİSTEMİ",
             "color": "border-purple",
-            "content": "Yayın olaylarına bahis yaparak yatırdığınızın tam <span class=\"val-text\">4 KATINI (4x)</span> kazanın. <br>\n                    Seçenek sınırı yoktur. <br><br>\n                    <span class=\"purple-text\">KOMUTLAR:</span><br>\n                    <span class=\"val-text\">!öngör [seçenek] [puan]</span><br>\n                    <span class=\"gold-text\">!bas [seçenek] [puan]</span>"
+            "content": "Yayın olaylarına bahis yaparak yatırdığınızın tam <span class=\"val-text\">Toplam puan/Yatırılan Puan oranında</span> kazanın. <br>\n                    Seçenek sınırı yoktur. <br><br>\n                    <span class=\"purple-text\">KOMUTLAR:</span><br>\n                    <span class=\"val-text\">!öngör [seçenek] [puan]</span><br>\n                    <span class=\"gold-text\">!bas [seçenek] [puan]</span>"
         },
         {
             "title": "💜 PUAN ETKİNLİKLERİ",
