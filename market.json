@@ -124,7 +124,7 @@
         "fiyat": "250",
         "group": "SHANAHYPE",
         "cmd": "reisim",
-        "gif": "market/reisim",
+        "gif": "market/reisim.png",
         "desc": "ShanaHype kategorisindeki her şey \"!shanahype -komut-\" şeklinde kullanılır."
     },
     {
