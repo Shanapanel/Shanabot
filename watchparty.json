@@ -96,5 +96,19 @@
         "endDate": "13.07.2026",
         "rating": "5",
         "note": "Hala daha gideri olan yayında izlerken chatle birlikte gülmekten kırıldığımız film."
+    },
+    {
+        "groupName": "3 APTAL",
+        "image": "https://m.media-amazon.com/images/M/MV5BNzc4ZWQ3NmYtODE0Ny00YTQ4LTlkZWItNTBkMGQ0MmUwMmJlXkEyXkFqcGc@._V1_QL75_UY281_CR3,0,190,281_.jpg",
+        "title": "3 APTAL",
+        "type": "film",
+        "status": "bitti",
+        "season": "",
+        "current": "1",
+        "total": "1",
+        "startDate": "28.07.2026",
+        "endDate": "28.07.2026",
+        "rating": "4.5",
+        "note": "Hala daha gideri olan hem güldüren hem de yaş geçtikçe sistem eleştirisinin değeri daha iyi anlaşılan film"
     }
 ]
